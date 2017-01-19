@@ -251,12 +251,63 @@ struct FMovement {
 	float Crawl;
 
 };
+
+/**
+* Main character base stats
+*/
+USTRUCT(BlueprintType)
+struct FBaseStats {
+	GENERATED_USTRUCT_BODY()
+
+	/**
+	* Health point
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 Health;
+
+	/**
+	* Vitality point
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 Vitality;
+
+	/**
+	* Strength point
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 Strength;
+
+	/**
+	* Agility point
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 Agility;
+
+	/**
+	* Intelligence point
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 Intelligence;
+};
+
 /**
 * Main character stats
 */
 USTRUCT(BlueprintType)
 struct FHeroStats {
 	GENERATED_USTRUCT_BODY()
+
+	/**
+	* Base stats character
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FBaseStats BaseStats;
+
+	/**
+	* Experience character
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 Experience;
 
 	/**
 	* Total health and resist
