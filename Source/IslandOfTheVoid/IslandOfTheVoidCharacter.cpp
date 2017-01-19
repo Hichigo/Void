@@ -50,7 +50,7 @@ void AIslandOfTheVoidCharacter::Tick(float DeltaSeconds)
 		// Trace to see what is under the mouse cursor
 		FHitResult Hit;
 		PC->GetHitResultUnderCursor(ECC_Visibility, true, Hit);
-
+		
 		//if (Hit.bBlockingHit)
 		//{
 		//	// We hit something, move there

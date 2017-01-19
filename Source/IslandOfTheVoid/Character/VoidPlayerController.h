@@ -17,4 +17,12 @@ class ISLANDOFTHEVOID_API AVoidPlayerController : public APlayerController
 public:
 	AVoidPlayerController();
 	
+private:
+
+	virtual void PlayerTick(float DeltaTime) override;
+	virtual void SetupInputComponent() override;
+
+	/** Move character to cursor */
+	void OnRightMousePressed();
+
 };
