@@ -7,5 +7,6 @@
 
 AVoidGameMode::AVoidGameMode()
 {
+	DefaultPawnClass = AVoidCharacter::StaticClass();
 	PlayerControllerClass = AVoidPlayerController::StaticClass();
 }

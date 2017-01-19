@@ -7,6 +7,10 @@
 AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
+	bCameraRotation = false;
+
+	SpeedCameraTilt = 30.0f;
+
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
 }
@@ -22,7 +26,18 @@ void AVoidPlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	InputComponent->BindAction("RightMouse", IE_Pressed, this, &AVoidPlayerController::OnRightMousePressed);
+	InputComponent->BindAction("MiddleMouse", IE_Pressed, this, &AVoidPlayerController::OnMiddleMousePressed);
+	InputComponent->BindAction("MiddleMouse", IE_Released, this, &AVoidPlayerController::OnMiddleMouseRelease);
 
+	InputComponent->BindAxis("CameraTilt", this, &AVoidPlayerController::OnCameraTilt);
+	InputComponent->BindAxis("CameraRotation", this, &AVoidPlayerController::OnCameraRotation);
+}
+
+void AVoidPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	CharacterRef = Cast<AVoidCharacter>(GetPawn());
 }
 
 void AVoidPlayerController::OnRightMousePressed()
@@ -41,5 +56,44 @@ void AVoidPlayerController::OnRightMousePressed()
 		{
 			NavSys->SimpleMoveToLocation(this, Hit.ImpactPoint);
 		}
+	}
+}
+
+void AVoidPlayerController::OnMiddleMousePressed()
+{
+	bCameraRotation = true;
+}
+
+void AVoidPlayerController::OnMiddleMouseRelease()
+{
+	bCameraRotation = false;
+}
+
+void AVoidPlayerController::OnCameraTilt(float Value)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("Value: %f, %b"), Value, bCameraTilt);
+	if (bCameraRotation)
+	{
+		FRotator CameraRotation = CharacterRef->GetCameraBoom()->RelativeRotation;
+		float pitch = CameraRotation.Pitch + SpeedCameraTilt * Value;
+		
+		CameraRotation.Pitch = FMath::Clamp(pitch, -80.0f, -10.0f);
+
+		CharacterRef->GetCameraBoom()->SetRelativeRotation(CameraRotation);
+		
+	}
+}
+
+void AVoidPlayerController::OnCameraRotation(float Value)
+{
+	if (bCameraRotation)
+	{
+		FRotator CameraRotation = CharacterRef->GetCameraBoom()->RelativeRotation;
+		float yaw = CameraRotation.Yaw + SpeedCameraTilt * Value;
+
+		CameraRotation.Yaw = yaw;
+
+		CharacterRef->GetCameraBoom()->SetRelativeRotation(CameraRotation);
+
 	}
 }
