@@ -4,7 +4,8 @@
 #include "VoidPlayerController.h"
 
 
-AVoidPlayerController::AVoidPlayerController()
+AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;

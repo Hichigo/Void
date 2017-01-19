@@ -15,7 +15,7 @@ class ISLANDOFTHEVOID_API AVoidPlayerController : public APlayerController
 	
 	
 public:
-	AVoidPlayerController();
+	AVoidPlayerController(const FObjectInitializer& ObjectInitializer);
 	
 private:
 

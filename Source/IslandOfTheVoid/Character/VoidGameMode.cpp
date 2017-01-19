@@ -5,4 +5,7 @@
 
 
 
-
+AVoidGameMode::AVoidGameMode()
+{
+	PlayerControllerClass = AVoidPlayerController::StaticClass();
+}
