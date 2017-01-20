@@ -2,6 +2,7 @@
 
 #pragma once
 #include "VoidCharacter.h"
+#include "Component/StatComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "VoidPlayerController.generated.h"
 
@@ -31,6 +32,10 @@ private:
 
 	/** Reference main character */
 	AVoidCharacter *CharacterRef;
+
+	/** Stat component character */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats", meta = (AllowPrivateAccess = "true"))
+	class UStatComponent* Stat;
 
 	/** Tick event */
 	virtual void PlayerTick(float DeltaTime) override;

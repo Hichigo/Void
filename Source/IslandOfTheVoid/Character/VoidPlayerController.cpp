@@ -12,6 +12,8 @@ AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectIni
 	SpeedCameraTilt = 5.0f;
 	SpeedCameraZoom = 20.0f;
 
+	Stat = CreateDefaultSubobject<UStatComponent>(TEXT("Stat"));
+
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
 }
