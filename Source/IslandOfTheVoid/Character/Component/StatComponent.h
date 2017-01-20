@@ -19,6 +19,10 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Hero stats")
 	FORCEINLINE FHeroStats GetAllStats() const { return HeroStat; }
 
+	/** Health increase */
+	UFUNCTION(BlueprintCallable, Category = "Hero stats")
+	void HealthIncrease();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

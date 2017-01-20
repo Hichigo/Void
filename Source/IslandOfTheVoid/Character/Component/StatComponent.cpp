@@ -15,13 +15,24 @@ UStatComponent::UStatComponent()
 }
 
 
+void UStatComponent::HealthIncrease()
+{
+	if (HeroStat.Experience - HeroStat.BaseStats.Health.Price >= 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("HORHOSH!"));
+		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Health.Price;
+	}
+}
+
 // Called when the game starts
 void UStatComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
 	// ...
-	
+	HeroStat.Experience = 300;
+	HeroStat.BaseStats.Health.Price = 100;
+
 }
 
 
