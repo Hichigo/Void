@@ -34,8 +34,11 @@ private:
 
 	/** Tick event */
 	virtual void PlayerTick(float DeltaTime) override;
+
+	/** Binding input */
 	virtual void SetupInputComponent() override;
 
+	/** Begin play event */
 	virtual void BeginPlay() override;
 
 	/** Move character to cursor */

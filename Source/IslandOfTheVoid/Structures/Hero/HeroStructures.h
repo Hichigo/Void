@@ -253,6 +253,39 @@ struct FMovement {
 };
 
 /**
+* Standalone stat in base stats
+*/
+USTRUCT(BlueprintType)
+struct FStat {
+	GENERATED_USTRUCT_BODY()
+
+	/**
+	* Number of points stat
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 Count;
+
+	/**
+	* Price for increase
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 Price;
+
+	/**
+	* The coefficient for attributes that did not increase
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float MinFactor;
+
+	/**
+	* The coefficient for attributes that did increase
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float MaxFactor;
+};
+
+
+/**
 * Main character base stats
 */
 USTRUCT(BlueprintType)
@@ -260,34 +293,34 @@ struct FBaseStats {
 	GENERATED_USTRUCT_BODY()
 
 	/**
-	* Health point
+	* Health stat
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	int32 Health;
+	FStat Health;
 
 	/**
-	* Vitality point
+	* Vitality stat
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	int32 Vitality;
+	FStat Vitality;
 
 	/**
-	* Strength point
+	* Strength stat
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	int32 Strength;
+	FStat Strength;
 
 	/**
-	* Agility point
+	* Agility stat
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	int32 Agility;
+	FStat Agility;
 
 	/**
-	* Intelligence point
+	* Intelligence stat
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	int32 Intelligence;
+	FStat Intelligence;
 };
 
 /**
