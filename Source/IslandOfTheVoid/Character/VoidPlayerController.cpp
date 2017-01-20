@@ -9,7 +9,8 @@ AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectIni
 {
 	bCameraRotation = false;
 
-	SpeedCameraTilt = 30.0f;
+	SpeedCameraTilt = 5.0f;
+	SpeedCameraZoom = 20.0f;
 
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
@@ -31,12 +32,14 @@ void AVoidPlayerController::SetupInputComponent()
 
 	InputComponent->BindAxis("CameraTilt", this, &AVoidPlayerController::OnCameraTilt);
 	InputComponent->BindAxis("CameraRotation", this, &AVoidPlayerController::OnCameraRotation);
+	InputComponent->BindAxis("CameraZoom", this, &AVoidPlayerController::OnCameraZoom);
 }
 
 void AVoidPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	/** Get main player reference */
 	CharacterRef = Cast<AVoidCharacter>(GetPawn());
 }
 
@@ -95,5 +98,15 @@ void AVoidPlayerController::OnCameraRotation(float Value)
 
 		CharacterRef->GetCameraBoom()->SetRelativeRotation(CameraRotation);
 
+	}
+}
+
+void AVoidPlayerController::OnCameraZoom(float Value)
+{
+	if (CharacterRef != nullptr)
+	{
+		float ArmLength = CharacterRef->GetCameraBoom()->TargetArmLength;
+		ArmLength = ArmLength + SpeedCameraZoom * Value;
+		CharacterRef->GetCameraBoom()->TargetArmLength = FMath::Clamp(ArmLength, 400.0f, 2000.0f);
 	}
 }

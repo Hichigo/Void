@@ -21,6 +21,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Camera Setting")
 	float SpeedCameraTilt;
 
+	/** Speed camera zoom */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Setting")
+	float SpeedCameraZoom;
 
 private:
 	/** If true can camera rotation pitch and yaw */
@@ -49,4 +52,7 @@ private:
 
 	/** The camera yaw rotation */
 	void OnCameraRotation(float Value);
+
+	/** The camera zoom up or down */
+	void OnCameraZoom(float Value);
 };
