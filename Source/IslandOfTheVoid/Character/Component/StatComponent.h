@@ -23,6 +23,22 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Hero stats")
 	void HealthIncrease();
 
+	/** Vitality increase */
+	UFUNCTION(BlueprintCallable, Category = "Hero stats")
+	void VitalityIncrease();
+
+	/** Strength increase */
+	UFUNCTION(BlueprintCallable, Category = "Hero stats")
+	void StrengthIncrease();
+
+	/** Agility increase */
+	UFUNCTION(BlueprintCallable, Category = "Hero stats")
+	void AgilityIncrease();
+
+	/** Intelligence increase */
+	UFUNCTION(BlueprintCallable, Category = "Hero stats")
+	void IntelligenceIncrease();
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -37,5 +53,14 @@ private:
 	/** All stats hero */
 	FHeroStats HeroStat;
 		
-	
+	/** Check experience for health increase */
+	bool CheckHealthIncrease();
+	/** Check experience for vitality increase */
+	bool CheckVitalityIncrease();
+	/** Check experience for strength increase */
+	bool CheckStrengthIncrease();
+	/** Check experience for agility increase */
+	bool CheckAgilityIncrease();
+	/** Check experience for intelligence increase */
+	bool CheckIntelligenceIncrease();
 };
