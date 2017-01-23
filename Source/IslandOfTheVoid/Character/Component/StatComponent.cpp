@@ -19,7 +19,6 @@ void UStatComponent::HealthIncrease()
 {
 	if (CheckHealthIncrease())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("HORHOSH!"));
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Health.Price;
 		HeroStat.BaseStats.Health.Count += 1;
 	}
@@ -29,7 +28,6 @@ void UStatComponent::VitalityIncrease()
 {
 	if (CheckHealthIncrease())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("HORHOSH!"));
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Vitality.Price;
 		HeroStat.BaseStats.Vitality.Count += 1;
 	}
@@ -39,7 +37,6 @@ void UStatComponent::StrengthIncrease()
 {
 	if (CheckHealthIncrease())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("HORHOSH!"));
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Strength.Price;
 		HeroStat.BaseStats.Strength.Count += 1;
 	}
@@ -49,7 +46,6 @@ void UStatComponent::AgilityIncrease()
 {
 	if (CheckHealthIncrease())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("HORHOSH!"));
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Agility.Price;
 		HeroStat.BaseStats.Agility.Count += 1;
 	}
@@ -59,7 +55,6 @@ void UStatComponent::IntelligenceIncrease()
 {
 	if (CheckHealthIncrease())
 	{
-		UE_LOG(LogTemp, Warning, TEXT("HORHOSH!"));
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Intelligence.Price;
 		HeroStat.BaseStats.Intelligence.Count += 1;
 	}
