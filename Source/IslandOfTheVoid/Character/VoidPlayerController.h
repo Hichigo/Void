@@ -33,6 +33,9 @@ private:
 	/** Reference main character */
 	AVoidCharacter *CharacterRef;
 
+	/** Remember mouse position when rotate camera */
+	FVector2D MousePosition;
+
 	/** Stat component character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats", meta = (AllowPrivateAccess = "true"))
 	class UStatComponent* Stat;

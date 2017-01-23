@@ -67,11 +67,20 @@ void AVoidPlayerController::OnRightMousePressed()
 void AVoidPlayerController::OnMiddleMousePressed()
 {
 	bCameraRotation = true;
+
+	// remember mouse position
+	GetMousePosition(MousePosition.X, MousePosition.Y);
+
+	// hide mouse cursor
+	bShowMouseCursor = false;
 }
 
 void AVoidPlayerController::OnMiddleMouseRelease()
 {
 	bCameraRotation = false;
+
+	// show mouse cursor
+	bShowMouseCursor = true;
 }
 
 void AVoidPlayerController::OnCameraTilt(float Value)
@@ -99,6 +108,9 @@ void AVoidPlayerController::OnCameraRotation(float Value)
 		CameraRotation.Yaw = yaw;
 
 		CharacterRef->GetCameraBoom()->SetRelativeRotation(CameraRotation);
+
+		//return mouse cursor to remember postion
+		SetMouseLocation(MousePosition.X, MousePosition.Y);
 
 	}
 }
