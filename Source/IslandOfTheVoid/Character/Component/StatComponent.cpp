@@ -12,6 +12,10 @@ UStatComponent::UStatComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
+
+	
+
+
 }
 
 
@@ -21,6 +25,8 @@ void UStatComponent::HealthIncrease()
 	{
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Health.Price;
 		HeroStat.BaseStats.Health.Count += 1;
+
+		HeroStat.BaseStats.Health.Price = HeroStat.BaseStats.Health.Price * HeroStat.BaseStats.Health.MaxFactor;
 	}
 }
 
@@ -30,6 +36,7 @@ void UStatComponent::VitalityIncrease()
 	{
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Vitality.Price;
 		HeroStat.BaseStats.Vitality.Count += 1;
+
 	}
 }
 
@@ -66,9 +73,12 @@ void UStatComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	HeroStat.Experience = 300;
+	HeroStat.Experience = 1300;
 	HeroStat.BaseStats.Health.Price = 100;
 
+	HeroStat.BaseStats.Health.MinFactor = 1.1f;
+
+	HeroStat.BaseStats.Health.MaxFactor = 1.2f;
 }
 
 
