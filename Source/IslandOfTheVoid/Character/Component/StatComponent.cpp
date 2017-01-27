@@ -107,13 +107,38 @@ void UStatComponent::BeginPlay()
 
 	// ...
 	HeroStat.Experience = 2300;
+
+	//Health base stats
 	HeroStat.BaseStats.Health.Price = 100;
 	HeroStat.BaseStats.Health.BasePrice = 10;
-
 	HeroStat.BaseStats.Health.MinFactor = 1.1f;
-
 	HeroStat.BaseStats.Health.MaxFactor = 1.2f;
+
+	//Vitality base stats
+	HeroStat.BaseStats.Vitality.Price = 100;
+	HeroStat.BaseStats.Vitality.BasePrice = 10;
+	HeroStat.BaseStats.Vitality.MinFactor = 1.1f;
+	HeroStat.BaseStats.Vitality.MaxFactor = 1.2f;
+
+	//Strength base stats
+	HeroStat.BaseStats.Strength.Price = 100;
+	HeroStat.BaseStats.Strength.BasePrice = 10;
+	HeroStat.BaseStats.Strength.MinFactor = 1.1f;
+	HeroStat.BaseStats.Strength.MaxFactor = 1.2f;
+
+	//Agility base stats
+	HeroStat.BaseStats.Agility.Price = 100;
+	HeroStat.BaseStats.Agility.BasePrice = 10;
+	HeroStat.BaseStats.Agility.MinFactor = 1.1f;
+	HeroStat.BaseStats.Agility.MaxFactor = 1.2f;
+
+	//Intelligence base stats
+	HeroStat.BaseStats.Intelligence.Price = 100;
+	HeroStat.BaseStats.Intelligence.BasePrice = 10;
+	HeroStat.BaseStats.Intelligence.MinFactor = 1.1f;
+	HeroStat.BaseStats.Intelligence.MaxFactor = 1.2f;
 }
+
 
 
 // Called every frame
