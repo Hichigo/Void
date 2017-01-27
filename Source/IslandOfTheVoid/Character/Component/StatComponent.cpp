@@ -106,7 +106,7 @@ void UStatComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	HeroStat.Experience = 2300;
+	HeroStat.Experience = 9999;
 
 	//Health base stats
 	HeroStat.BaseStats.Health.Price = 100;
