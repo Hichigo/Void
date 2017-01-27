@@ -15,6 +15,8 @@ public:
 	// Sets default values for this component's properties
 	UStatComponent();
 
+	
+
 	/** Return all stats hero */
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Hero stats")
 	FORCEINLINE FHeroStats GetAllStats() const { return HeroStat; }

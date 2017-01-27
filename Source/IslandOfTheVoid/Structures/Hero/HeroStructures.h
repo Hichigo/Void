@@ -271,6 +271,13 @@ struct FStat {
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	int32 Price;
 
+
+	/**
+	* Price for increase
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	int32 BasePrice;
+
 	/**
 	* The coefficient for attributes that did not increase
 	*/
@@ -282,6 +289,18 @@ struct FStat {
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	float MaxFactor;
+
+public:
+
+	void CalculateNewPriceMin()
+	{
+		Price += BasePrice * MinFactor;
+	}
+
+	void CalculateNewPriceMax()
+	{
+		Price += BasePrice * MaxFactor;
+	}
 };
 
 

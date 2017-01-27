@@ -12,7 +12,7 @@ UStatComponent::UStatComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
-
+	
 	
 
 
@@ -26,44 +26,77 @@ void UStatComponent::HealthIncrease()
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Health.Price;
 		HeroStat.BaseStats.Health.Count += 1;
 
-		HeroStat.BaseStats.Health.Price = HeroStat.BaseStats.Health.Price * HeroStat.BaseStats.Health.MaxFactor;
+		HeroStat.BaseStats.Health.CalculateNewPriceMax();
+
+		HeroStat.BaseStats.Vitality.CalculateNewPriceMin();
+		HeroStat.BaseStats.Strength.CalculateNewPriceMin();
+		HeroStat.BaseStats.Agility.CalculateNewPriceMin();
+		HeroStat.BaseStats.Intelligence.CalculateNewPriceMin();
 	}
 }
 
 void UStatComponent::VitalityIncrease()
 {
-	if (CheckHealthIncrease())
+	if (CheckVitalityIncrease())
 	{
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Vitality.Price;
 		HeroStat.BaseStats.Vitality.Count += 1;
 
+		HeroStat.BaseStats.Vitality.CalculateNewPriceMax();
+
+		HeroStat.BaseStats.Health.CalculateNewPriceMin();
+		HeroStat.BaseStats.Strength.CalculateNewPriceMin();
+		HeroStat.BaseStats.Agility.CalculateNewPriceMin();
+		HeroStat.BaseStats.Intelligence.CalculateNewPriceMin();
 	}
 }
 
 void UStatComponent::StrengthIncrease()
 {
-	if (CheckHealthIncrease())
+	if (CheckStrengthIncrease())
 	{
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Strength.Price;
 		HeroStat.BaseStats.Strength.Count += 1;
+
+		HeroStat.BaseStats.Strength.CalculateNewPriceMax();
+		
+		HeroStat.BaseStats.Vitality.CalculateNewPriceMin();
+		HeroStat.BaseStats.Health.CalculateNewPriceMin();
+		HeroStat.BaseStats.Agility.CalculateNewPriceMin();
+		HeroStat.BaseStats.Intelligence.CalculateNewPriceMin();
 	}
 }
 
 void UStatComponent::AgilityIncrease()
 {
-	if (CheckHealthIncrease())
+	if (CheckAgilityIncrease())
 	{
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Agility.Price;
 		HeroStat.BaseStats.Agility.Count += 1;
+
+		HeroStat.BaseStats.Agility.CalculateNewPriceMax();
+		
+		HeroStat.BaseStats.Vitality.CalculateNewPriceMin();
+		HeroStat.BaseStats.Health.CalculateNewPriceMin();
+		HeroStat.BaseStats.Strength.CalculateNewPriceMin();
+		HeroStat.BaseStats.Intelligence.CalculateNewPriceMin();
 	}
 }
 
 void UStatComponent::IntelligenceIncrease()
 {
-	if (CheckHealthIncrease())
+	if (CheckIntelligenceIncrease())
 	{
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Intelligence.Price;
 		HeroStat.BaseStats.Intelligence.Count += 1;
+
+		HeroStat.BaseStats.Intelligence.CalculateNewPriceMax();
+		
+		HeroStat.BaseStats.Vitality.CalculateNewPriceMin();
+		HeroStat.BaseStats.Health.CalculateNewPriceMin();
+		HeroStat.BaseStats.Strength.CalculateNewPriceMin();
+		HeroStat.BaseStats.Agility.CalculateNewPriceMin();
+		
 	}
 }
 
@@ -73,8 +106,9 @@ void UStatComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	HeroStat.Experience = 1300;
+	HeroStat.Experience = 2300;
 	HeroStat.BaseStats.Health.Price = 100;
+	HeroStat.BaseStats.Health.BasePrice = 10;
 
 	HeroStat.BaseStats.Health.MinFactor = 1.1f;
 
