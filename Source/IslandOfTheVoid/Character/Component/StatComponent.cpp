@@ -108,7 +108,6 @@ void UStatComponent::BeginPlay()
 	// ...
 	HeroStat.Experience = 9999;
 
-
 #define LOCTEXT_NAMESPACE "AttributeName"
 	HeroStat.BaseStats.Health.NameStat = LOCTEXT("HealthName", "Health");
 	HeroStat.BaseStats.Vitality.NameStat = LOCTEXT("VitalityName", "Vitality");
