@@ -108,35 +108,49 @@ void UStatComponent::BeginPlay()
 	// ...
 	HeroStat.Experience = 9999;
 
+
+#define LOCTEXT_NAMESPACE "AttributeName"
+	HeroStat.BaseStats.Health.NameStat = LOCTEXT("HealthName", "Health");
+	HeroStat.BaseStats.Vitality.NameStat = LOCTEXT("VitalityName", "Vitality");
+	HeroStat.BaseStats.Strength.NameStat = LOCTEXT("StrengthName", "Strength");
+	HeroStat.BaseStats.Agility.NameStat = LOCTEXT("AgilityName", "Agility");
+	HeroStat.BaseStats.Intelligence.NameStat = LOCTEXT("IntelligenceName", "Intelligence");
+#undef LOCTEXT_NAMESPACE
+
 	//Health base stats
+	HeroStat.BaseStats.Health.Count = 8;
 	HeroStat.BaseStats.Health.Price = 100;
 	HeroStat.BaseStats.Health.BasePrice = 10;
 	HeroStat.BaseStats.Health.MinFactor = 1.1f;
-	HeroStat.BaseStats.Health.MaxFactor = 1.2f;
+	HeroStat.BaseStats.Health.MaxFactor = 1.5f;
 
 	//Vitality base stats
+	HeroStat.BaseStats.Vitality.Count = 8;
 	HeroStat.BaseStats.Vitality.Price = 100;
 	HeroStat.BaseStats.Vitality.BasePrice = 10;
 	HeroStat.BaseStats.Vitality.MinFactor = 1.1f;
-	HeroStat.BaseStats.Vitality.MaxFactor = 1.2f;
+	HeroStat.BaseStats.Vitality.MaxFactor = 1.5f;
 
 	//Strength base stats
+	HeroStat.BaseStats.Strength.Count = 8;
 	HeroStat.BaseStats.Strength.Price = 100;
 	HeroStat.BaseStats.Strength.BasePrice = 10;
 	HeroStat.BaseStats.Strength.MinFactor = 1.1f;
-	HeroStat.BaseStats.Strength.MaxFactor = 1.2f;
+	HeroStat.BaseStats.Strength.MaxFactor = 1.5f;
 
 	//Agility base stats
+	HeroStat.BaseStats.Agility.Count = 8;
 	HeroStat.BaseStats.Agility.Price = 100;
 	HeroStat.BaseStats.Agility.BasePrice = 10;
 	HeroStat.BaseStats.Agility.MinFactor = 1.1f;
-	HeroStat.BaseStats.Agility.MaxFactor = 1.2f;
+	HeroStat.BaseStats.Agility.MaxFactor = 1.5f;
 
 	//Intelligence base stats
+	HeroStat.BaseStats.Intelligence.Count = 8;
 	HeroStat.BaseStats.Intelligence.Price = 100;
 	HeroStat.BaseStats.Intelligence.BasePrice = 10;
 	HeroStat.BaseStats.Intelligence.MinFactor = 1.1f;
-	HeroStat.BaseStats.Intelligence.MaxFactor = 1.2f;
+	HeroStat.BaseStats.Intelligence.MaxFactor = 1.5f;
 }
 
 

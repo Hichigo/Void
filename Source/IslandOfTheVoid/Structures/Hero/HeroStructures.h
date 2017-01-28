@@ -260,6 +260,12 @@ struct FStat {
 	GENERATED_USTRUCT_BODY()
 
 	/**
+	* Text name stat
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FText NameStat;
+
+	/**
 	* Number of points stat
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
