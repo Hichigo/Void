@@ -28,21 +28,21 @@ void UStatComponent::HealthIncrease()
 
 		HeroStat.BaseStats.Health.CalculateNewPriceMax();
 
-		HeroStat.BaseStats.Vitality.CalculateNewPriceMin();
+		HeroStat.BaseStats.Endurance.CalculateNewPriceMin();
 		HeroStat.BaseStats.Strength.CalculateNewPriceMin();
 		HeroStat.BaseStats.Agility.CalculateNewPriceMin();
 		HeroStat.BaseStats.Intelligence.CalculateNewPriceMin();
 	}
 }
 
-void UStatComponent::VitalityIncrease()
+void UStatComponent::EnduranceIncrease()
 {
-	if (CheckVitalityIncrease())
+	if (CheckEnduranceIncrease())
 	{
-		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Vitality.Price;
-		HeroStat.BaseStats.Vitality.Count += 1;
+		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Endurance.Price;
+		HeroStat.BaseStats.Endurance.Count += 1;
 
-		HeroStat.BaseStats.Vitality.CalculateNewPriceMax();
+		HeroStat.BaseStats.Endurance.CalculateNewPriceMax();
 
 		HeroStat.BaseStats.Health.CalculateNewPriceMin();
 		HeroStat.BaseStats.Strength.CalculateNewPriceMin();
@@ -60,7 +60,7 @@ void UStatComponent::StrengthIncrease()
 
 		HeroStat.BaseStats.Strength.CalculateNewPriceMax();
 		
-		HeroStat.BaseStats.Vitality.CalculateNewPriceMin();
+		HeroStat.BaseStats.Endurance.CalculateNewPriceMin();
 		HeroStat.BaseStats.Health.CalculateNewPriceMin();
 		HeroStat.BaseStats.Agility.CalculateNewPriceMin();
 		HeroStat.BaseStats.Intelligence.CalculateNewPriceMin();
@@ -76,7 +76,7 @@ void UStatComponent::AgilityIncrease()
 
 		HeroStat.BaseStats.Agility.CalculateNewPriceMax();
 		
-		HeroStat.BaseStats.Vitality.CalculateNewPriceMin();
+		HeroStat.BaseStats.Endurance.CalculateNewPriceMin();
 		HeroStat.BaseStats.Health.CalculateNewPriceMin();
 		HeroStat.BaseStats.Strength.CalculateNewPriceMin();
 		HeroStat.BaseStats.Intelligence.CalculateNewPriceMin();
@@ -92,7 +92,7 @@ void UStatComponent::IntelligenceIncrease()
 
 		HeroStat.BaseStats.Intelligence.CalculateNewPriceMax();
 		
-		HeroStat.BaseStats.Vitality.CalculateNewPriceMin();
+		HeroStat.BaseStats.Endurance.CalculateNewPriceMin();
 		HeroStat.BaseStats.Health.CalculateNewPriceMin();
 		HeroStat.BaseStats.Strength.CalculateNewPriceMin();
 		HeroStat.BaseStats.Agility.CalculateNewPriceMin();
@@ -110,7 +110,7 @@ void UStatComponent::BeginPlay()
 
 #define LOCTEXT_NAMESPACE "AttributeName"
 	HeroStat.BaseStats.Health.NameStat = LOCTEXT("HealthName", "Health");
-	HeroStat.BaseStats.Vitality.NameStat = LOCTEXT("VitalityName", "Vitality");
+	HeroStat.BaseStats.Endurance.NameStat = LOCTEXT("EnduranceName", "Endurance");
 	HeroStat.BaseStats.Strength.NameStat = LOCTEXT("StrengthName", "Strength");
 	HeroStat.BaseStats.Agility.NameStat = LOCTEXT("AgilityName", "Agility");
 	HeroStat.BaseStats.Intelligence.NameStat = LOCTEXT("IntelligenceName", "Intelligence");
@@ -123,12 +123,12 @@ void UStatComponent::BeginPlay()
 	HeroStat.BaseStats.Health.MinFactor = 1.1f;
 	HeroStat.BaseStats.Health.MaxFactor = 1.5f;
 
-	//Vitality base stats
-	HeroStat.BaseStats.Vitality.Count = 8;
-	HeroStat.BaseStats.Vitality.Price = 100;
-	HeroStat.BaseStats.Vitality.BasePrice = 10;
-	HeroStat.BaseStats.Vitality.MinFactor = 1.1f;
-	HeroStat.BaseStats.Vitality.MaxFactor = 1.5f;
+	//Endurance base stats
+	HeroStat.BaseStats.Endurance.Count = 8;
+	HeroStat.BaseStats.Endurance.Price = 100;
+	HeroStat.BaseStats.Endurance.BasePrice = 10;
+	HeroStat.BaseStats.Endurance.MinFactor = 1.1f;
+	HeroStat.BaseStats.Endurance.MaxFactor = 1.5f;
 
 	//Strength base stats
 	HeroStat.BaseStats.Strength.Count = 8;
@@ -160,6 +160,23 @@ void UStatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+
+	if (IsNotFullHealth())
+	{
+		// to do rengeneration total hp and body part
+	}
+
+	if (IsNotFullEndurance())
+	{
+		// increase Endurance
+		HeroStat.Endurance.Current += HeroStat.BaseStats.RegenerationEndurance;
+
+		// endurance check to not exceed a maximum of
+		if (HeroStat.Endurance.Current > HeroStat.Endurance.Max)
+		{
+			HeroStat.Endurance.Current = HeroStat.Endurance.Max;
+		}
+	}
 }
 
 bool UStatComponent::CheckHealthIncrease()
@@ -167,9 +184,9 @@ bool UStatComponent::CheckHealthIncrease()
 	return HeroStat.Experience - HeroStat.BaseStats.Health.Price >= 0;
 }
 
-bool UStatComponent::CheckVitalityIncrease()
+bool UStatComponent::CheckEnduranceIncrease()
 {
-	return HeroStat.Experience - HeroStat.BaseStats.Vitality.Price >= 0;
+	return HeroStat.Experience - HeroStat.BaseStats.Endurance.Price >= 0;
 }
 
 bool UStatComponent::CheckStrengthIncrease()
@@ -185,5 +202,15 @@ bool UStatComponent::CheckAgilityIncrease()
 bool UStatComponent::CheckIntelligenceIncrease()
 {
 	return HeroStat.Experience - HeroStat.BaseStats.Intelligence.Price >= 0;
+}
+
+bool UStatComponent::IsNotFullHealth()
+{
+	return HeroStat.Total.Health.Current < HeroStat.Total.Health.Max;
+}
+
+bool UStatComponent::IsNotFullEndurance()
+{
+	return HeroStat.Endurance.Current < HeroStat.Endurance.Max;
 }
 

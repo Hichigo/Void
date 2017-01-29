@@ -7,7 +7,7 @@
 
 
 /**
-* Struct for progress bar like a health or vitality etc.
+* Enumeration for move type character
 */
 UENUM(BlueprintType)
 enum class EMoveType : uint8
@@ -20,7 +20,7 @@ enum class EMoveType : uint8
 
 
 /**
- * Struct for progress bar like a health or vitality etc.
+ * Struct for progress bar like a health or Endurance etc.
  */
 USTRUCT(BlueprintType)
 struct FBar {
@@ -324,10 +324,10 @@ struct FBaseStats {
 	FStat Health;
 
 	/**
-	* Vitality stat
+	* Endurance stat
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	FStat Vitality;
+	FStat Endurance;
 
 	/**
 	* Strength stat
@@ -346,6 +346,18 @@ struct FBaseStats {
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	FStat Intelligence;
+
+	/**
+	* Regenration per second health
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float RegenerationHealth;
+
+	/**
+	* Regenration per second Endurance
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float RegenerationEndurance;
 };
 
 /**
@@ -372,6 +384,12 @@ struct FHeroStats {
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	FBodyPart Total;
+
+	/**
+	* Total Endurance
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	FBar Endurance;
 
 	/**
 	* Head health and resist

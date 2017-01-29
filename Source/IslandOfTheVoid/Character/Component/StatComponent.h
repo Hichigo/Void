@@ -25,9 +25,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Hero stats")
 	void HealthIncrease();
 
-	/** Vitality increase */
+	/** Endurance increase */
 	UFUNCTION(BlueprintCallable, Category = "Hero stats")
-	void VitalityIncrease();
+	void EnduranceIncrease();
 
 	/** Strength increase */
 	UFUNCTION(BlueprintCallable, Category = "Hero stats")
@@ -57,12 +57,17 @@ private:
 		
 	/** Check experience for health increase */
 	bool CheckHealthIncrease();
-	/** Check experience for vitality increase */
-	bool CheckVitalityIncrease();
+	/** Check experience for Endurance increase */
+	bool CheckEnduranceIncrease();
 	/** Check experience for strength increase */
 	bool CheckStrengthIncrease();
 	/** Check experience for agility increase */
 	bool CheckAgilityIncrease();
 	/** Check experience for intelligence increase */
 	bool CheckIntelligenceIncrease();
+
+	/** Check on full health */
+	bool IsNotFullHealth();
+	/** Check on full Endurance */
+	bool IsNotFullEndurance();
 };
