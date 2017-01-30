@@ -14,7 +14,8 @@ enum class EAbilityType : uint8 {
 	Passive,
 	Active,
 	Stance,
-	Improve
+	Improve,
+	RootBranch
 };
 
 
@@ -22,18 +23,23 @@ USTRUCT(BlueprintType)
 struct FAbility {
 	GENERATED_USTRUCT_BODY()
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 ID;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FText Name;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FText Description;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EAbilityType Type;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<int32> PrevAbilityId;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	TArray<int32> NextAbilityId;
 };
 
 UCLASS()
