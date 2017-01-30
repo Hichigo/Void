@@ -8,11 +8,13 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(BlueprintType)
 class ISLANDOFTHEVOID_API UDataAbility : public UDataAsset
 {
 	GENERATED_BODY()
 	
+public:
+	UDataAbility();
 	
 public:
 

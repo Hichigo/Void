@@ -15,14 +15,16 @@ public:
 	// Sets default values for this component's properties
 	UAbilityComponent();
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<UDataAbility*> StrengthAbility;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<UDataAbility*> AgilityAbility;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<UDataAbility*> IntelligenceAbility;
+
+	/*UDataAbility*/void FindAbilityById(TArray<UDataAbility*> Ability, int32 index) const;
 
 protected:
 	// Called when the game starts

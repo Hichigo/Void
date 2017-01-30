@@ -15,6 +15,11 @@ UAbilityComponent::UAbilityComponent()
 }
 
 
+void UAbilityComponent::FindAbilityById(TArray<UDataAbility*> Ability, int32 index) const
+{
+	
+}
+
 // Called when the game starts
 void UAbilityComponent::BeginPlay()
 {
