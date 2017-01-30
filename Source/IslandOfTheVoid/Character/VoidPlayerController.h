@@ -3,6 +3,7 @@
 #pragma once
 #include "VoidCharacter.h"
 #include "Component/StatComponent.h"
+#include "Component/AbilityComponent.h"
 #include "GameFramework/PlayerController.h"
 #include "VoidPlayerController.generated.h"
 
@@ -39,6 +40,10 @@ private:
 	/** Stat component character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Stats", meta = (AllowPrivateAccess = "true"))
 	class UStatComponent* Stat;
+
+	/** Stat component character */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability", meta = (AllowPrivateAccess = "true"))
+	class UAbilityComponent* Ability;
 
 	/** Tick event */
 	virtual void PlayerTick(float DeltaTime) override;

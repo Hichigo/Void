@@ -14,6 +14,8 @@ AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectIni
 
 	Stat = CreateDefaultSubobject<UStatComponent>(TEXT("Stat"));
 
+	Ability = CreateDefaultSubobject<UAbilityComponent>(TEXT("Ability"));
+
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
 }
