@@ -15,9 +15,24 @@ UAbilityComponent::UAbilityComponent()
 }
 
 
-void UAbilityComponent::FindAbilityById(TArray<UDataAbility*> Ability, int32 index) const
+UDataAbility* UAbilityComponent::FindAbilityById(TArray<UDataAbility*> ArrayAbility, int32 SearchIndex) const
 {
-	
+	//for(auto &Ability : ArrayAbility)
+	//{
+	//	if (Ability->InfoAbility.ID == SearchIndex)
+	//	{
+	//		return Ability;
+	//	}
+	//}
+	for (int32 Index = 0; Index != ArrayAbility.Num(); ++Index)
+	{
+		if (ArrayAbility[Index]->AbilityInfo.ID == SearchIndex)
+		{
+			return ArrayAbility[Index];
+		}
+	}
+
+	return ArrayAbility[0];
 }
 
 // Called when the game starts

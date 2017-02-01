@@ -19,6 +19,9 @@ public:
 public:
 
 	UPROPERTY(EditAnywhere)
-	FAbility CurrentAbility;
+	FAbility AbilityInfo;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Hero|Ability")
+	FAbility GetAbilityInfo() { return AbilityInfo; }
 
 };

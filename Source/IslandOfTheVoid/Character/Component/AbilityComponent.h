@@ -24,7 +24,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<UDataAbility*> IntelligenceAbility;
 
-	/*UDataAbility*/void FindAbilityById(TArray<UDataAbility*> Ability, int32 index) const;
+	UFUNCTION(BlueprintCallable, Category = "Hero|Ability")
+	UDataAbility* FindAbilityById(TArray<UDataAbility*> Ability, int32 index) const;
+
 
 protected:
 	// Called when the game starts
