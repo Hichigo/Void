@@ -11,14 +11,23 @@
 
 UENUM(BlueprintType)
 enum class EAbilityType : uint8 {
+	/** passive ability */
 	Passive,
+
+	/** active ability */
 	Active,
+
+	/** stance ability */
 	Stance,
+
+	/** improve ability */
 	Improve,
+
+	/** begin ability in branch */
 	RootBranch
 };
 
-
+/** Information about ability */
 USTRUCT(BlueprintType)
 struct FAbility {
 	GENERATED_USTRUCT_BODY()
@@ -34,6 +43,12 @@ struct FAbility {
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EAbilityType Type;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsTake;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 Price;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	TArray<int32> PrevAbilityId;
