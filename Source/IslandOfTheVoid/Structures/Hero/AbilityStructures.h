@@ -48,6 +48,9 @@ struct FAbility {
 	bool bIsTake;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bCanTake;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Price;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
