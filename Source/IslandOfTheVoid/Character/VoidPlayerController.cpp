@@ -11,10 +11,10 @@ AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectIni
 
 	SpeedCameraTilt = 5.0f;
 	SpeedCameraZoom = 20.0f;
+	
+	Stat = ObjectInitializer.CreateDefaultSubobject<UStatComponent>(this, TEXT("Stat"));
 
-	Stat = CreateDefaultSubobject<UStatComponent>(TEXT("Stat"));
-
-	Ability = CreateDefaultSubobject<UAbilityComponent>(TEXT("Ability"));
+	Ability = ObjectInitializer.CreateDefaultSubobject<UAbilityComponent>(this, TEXT("Ability"));
 	
 	bShowMouseCursor = true;
 	DefaultMouseCursor = EMouseCursor::Crosshairs;

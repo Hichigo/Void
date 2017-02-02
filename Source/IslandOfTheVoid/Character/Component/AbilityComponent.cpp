@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-//#include "Character/VoidPlayerController.h"
 #include "IslandOfTheVoid.h"
 #include "AbilityComponent.h"
 
@@ -13,13 +12,6 @@ UAbilityComponent::UAbilityComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	/** Get player controller reference */
-	//PC = Cast<AVoidPlayerController>(GetWorld()->GetFirstPlayerController());
-	
-	/** Get Stat component reference */
-	//StatRef = PC->GetStat();
-	
-	//StatRef->GetAllStats().Experience;
 }
 
 

@@ -27,7 +27,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hero|Ability")
 	TArray<UDataAbility*> IntelligenceAbility;
 
-
 	/** Find ability by id and return finded ability else return root ability */
 	UFUNCTION(BlueprintCallable, Category = "Hero|Ability")
 	UDataAbility* FindAbilityById(TArray<UDataAbility*> Ability, int32 index) const;
@@ -45,8 +44,6 @@ public:
 
 private:
 
-	//APlayerController* PC;
-	//UStatComponent* StatRef;
 	/*
 	Найти нужный навык
 	проверить хватает ли для его прокачки опыта
