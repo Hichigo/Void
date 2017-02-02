@@ -1,7 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "Character/VoidPlayerController.h"
 #include "IslandOfTheVoid.h"
 #include "AbilityComponent.h"
+
 
 
 // Sets default values for this component's properties
@@ -11,19 +13,18 @@ UAbilityComponent::UAbilityComponent()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	// ...
+	/** Get player controller reference */
+	AVoidPlayerController *PC = Cast<AVoidPlayerController>(GetWorld()->GetFirstPlayerController());
+	
+	/** Get Stat component reference */
+	UStatComponent* StatRef = PC->GetStat();
+
+	//StatRef->GetAllStats().Experience;
 }
 
 
 UDataAbility* UAbilityComponent::FindAbilityById(TArray<UDataAbility*> ArrayAbility, int32 SearchIndex) const
 {
-	//for(auto &Ability : ArrayAbility)
-	//{
-	//	if (Ability->InfoAbility.ID == SearchIndex)
-	//	{
-	//		return Ability;
-	//	}
-	//}
 	for (int32 Index = 0; Index != ArrayAbility.Num(); ++Index)
 	{
 		if (ArrayAbility[Index]->AbilityInfo.ID == SearchIndex)

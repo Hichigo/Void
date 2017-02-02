@@ -15,15 +15,17 @@ public:
 	// Sets default values for this component's properties
 	UAbilityComponent();
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hero|Ability")
 	TArray<UDataAbility*> StrengthAbility;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hero|Ability")
 	TArray<UDataAbility*> AgilityAbility;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hero|Ability")
 	TArray<UDataAbility*> IntelligenceAbility;
 
+
+	/** Find ability by id and return finded ability else return root ability */
 	UFUNCTION(BlueprintCallable, Category = "Hero|Ability")
 	UDataAbility* FindAbilityById(TArray<UDataAbility*> Ability, int32 index) const;
 
@@ -36,6 +38,13 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
 	
+	/*
+	Найти нужный навык
+	проверить хватает ли для его прокачки опыта
+		если хватает прокачать
+		открыть доступ к следующему/щим навыкам
+
+		если не хватает ничего не делать
+	*/
 };

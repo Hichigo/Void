@@ -27,6 +27,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Setting")
 	float SpeedCameraZoom;
 
+	/** Returns Ability component subobject **/
+	FORCEINLINE class UAbilityComponent* GetAbility() const { return Ability; }
+
+	/** Returns Stat component subobject **/
+	FORCEINLINE class UStatComponent* GetStat() const { return Stat; }
+
 private:
 	/** If true can camera rotation pitch and yaw */
 	bool bCameraRotation;
