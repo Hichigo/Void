@@ -9,3 +9,21 @@ UDataAbility::UDataAbility()
 {
 
 }
+
+bool UDataAbility::AccessAbility()
+{
+	if(PreviousAbility.Num())
+	{
+		bool IsMayTake = true;
+		for (int32 Index = 0; PreviousAbility.Num(); ++Index)
+		{
+			if (!PreviousAbility[Index]->AbilityInfo.bIsTake)
+			{
+				return false;
+			}
+		}
+		AbilityInfo.bCanTake = true;
+		return true;
+	}
+	return false;
+}

@@ -22,12 +22,23 @@ AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectIni
 
 void AVoidPlayerController::TakeAbility(TArray<UDataAbility*> ArrayAbility, int32 SearchIndex)
 {
+	// find ability
 	UDataAbility *FindedAbility = Ability->FindAbilityById(ArrayAbility, SearchIndex);
 	if (FindedAbility != nullptr)
 	{
+		// if experience enough 
 		if (Stat->ReduceExperience(FindedAbility->AbilityInfo.Price))
 		{
 			FindedAbility->AbilityInfo.bIsTake = true;
+			TArray<UDataAbility*> L_NextAbility = FindedAbility->GetNextAbilites();
+			if (L_NextAbility.Num())
+			{
+				for (int32 Index = 0; Index < L_NextAbility.Num(); ++Index)
+				{
+					// access ability
+					L_NextAbility[Index]->AccessAbility();
+				}
+			}
 		}
 	}
 }

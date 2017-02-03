@@ -42,4 +42,7 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Hero|AbilityInfo")
 	FORCEINLINE TArray<UDataAbility*> GetPreviousAbilites() { return PreviousAbility; }
 
+	bool AccessAbility();
+
+
 };
