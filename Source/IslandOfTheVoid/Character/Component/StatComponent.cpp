@@ -101,6 +101,18 @@ void UStatComponent::IntelligenceIncrease()
 	}
 }
 
+bool UStatComponent::ReduceExperience(int32 HowMuch)
+{
+	if (HeroStat.Experience - HowMuch >= 0)
+	{
+		HeroStat.Experience = HeroStat.Experience - HowMuch;
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 // Called when the game starts
 void UStatComponent::BeginPlay()
 {

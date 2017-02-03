@@ -18,12 +18,15 @@ public:
 	// Sets default values for this component's properties
 	UAbilityComponent();
 
+	/** Data strength ability id: 0-999 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hero|Ability")
 	TArray<UDataAbility*> StrengthAbility;
 
+	/** Data agility ability id: 1000-1999 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hero|Ability")
 	TArray<UDataAbility*> AgilityAbility;
 
+	/** Data intelligence ability id: 2000-2999 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Hero|Ability")
 	TArray<UDataAbility*> IntelligenceAbility;
 
@@ -44,12 +47,5 @@ public:
 
 private:
 
-	/*
-	Найти нужный навык
-	проверить хватает ли для его прокачки опыта
-		если хватает прокачать
-		открыть доступ к следующему/щим навыкам
 
-		если не хватает ничего не делать
-	*/
 };

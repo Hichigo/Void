@@ -20,6 +20,18 @@ AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectIni
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
 }
 
+void AVoidPlayerController::TakeAbility(TArray<UDataAbility*> ArrayAbility, int32 SearchIndex)
+{
+	UDataAbility *FindedAbility = Ability->FindAbilityById(ArrayAbility, SearchIndex);
+	if (FindedAbility != nullptr)
+	{
+		if (Stat->ReduceExperience(FindedAbility->AbilityInfo.Price))
+		{
+			FindedAbility->AbilityInfo.bIsTake = true;
+		}
+	}
+}
+
 void AVoidPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);

@@ -41,6 +41,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Hero stats")
 	void IntelligenceIncrease();
 
+	bool ReduceExperience(int32 HowMuch);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;

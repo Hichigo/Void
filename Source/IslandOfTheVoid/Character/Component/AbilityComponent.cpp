@@ -25,7 +25,7 @@ UDataAbility* UAbilityComponent::FindAbilityById(TArray<UDataAbility*> ArrayAbil
 		}
 	}
 
-	return ArrayAbility[0];
+	return nullptr;
 }
 
 // Called when the game starts

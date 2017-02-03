@@ -33,6 +33,17 @@ public:
 	/** Returns Stat component subobject **/
 	FORCEINLINE class UStatComponent* GetStat() const { return Stat; }
 
+	/*
+	Найти нужный навык
+	проверить хватает ли для его прокачки опыта
+	если хватает прокачать
+	открыть доступ к следующему/щим навыкам
+
+	если не хватает ничего не делать
+	*/
+	UFUNCTION(BlueprintCallable, Category = "Hero|Ability")
+	void TakeAbility(TArray<UDataAbility*> ArrayAbility, int32 SearchIndex);
+
 private:
 	/** If true can camera rotation pitch and yaw */
 	bool bCameraRotation;
