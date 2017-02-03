@@ -53,11 +53,6 @@ struct FAbility {
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Price;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<int32> PrevAbilityId;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	TArray<int32> NextAbilityId;
 };
 
 UCLASS()

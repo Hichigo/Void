@@ -21,7 +21,19 @@ public:
 	UPROPERTY(EditAnywhere)
 	FAbility AbilityInfo;
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Hero|Ability")
-	FAbility GetAbilityInfo() { return AbilityInfo; }
+	UPROPERTY(EditAnywhere)
+	TArray<UDataAbility*> NextAbility;
+
+	UPROPERTY(EditAnywhere)
+	TArray<UDataAbility*> PreviousAbility;
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Hero|AbilityInfo")
+	FORCEINLINE FAbility GetAbilityInfo() { return AbilityInfo; }
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Hero|AbilityInfo")
+	FORCEINLINE TArray<UDataAbility*> GetNextAbilites() { return NextAbility; }
+
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Hero|AbilityInfo")
+	FORCEINLINE TArray<UDataAbility*> GetPreviousAbilites() { return PreviousAbility; }
 
 };
