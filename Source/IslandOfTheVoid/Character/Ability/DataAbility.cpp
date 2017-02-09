@@ -7,14 +7,14 @@
 
 UDataAbility::UDataAbility()
 {
-
+	AbilityInfo.bCanTake = false;
+	AbilityInfo.bIsTake = false;
 }
 
 bool UDataAbility::AccessAbility()
 {
 	if(PreviousAbility.Num())
 	{
-		bool IsMayTake = true;
 		for (int32 Index = 0; Index < PreviousAbility.Num(); ++Index)
 		{
 			if (!PreviousAbility[Index]->AbilityInfo.bIsTake)
