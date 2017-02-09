@@ -15,7 +15,7 @@ bool UDataAbility::AccessAbility()
 	if(PreviousAbility.Num())
 	{
 		bool IsMayTake = true;
-		for (int32 Index = 0; PreviousAbility.Num(); ++Index)
+		for (int32 Index = 0; Index < PreviousAbility.Num(); ++Index)
 		{
 			if (!PreviousAbility[Index]->AbilityInfo.bIsTake)
 			{

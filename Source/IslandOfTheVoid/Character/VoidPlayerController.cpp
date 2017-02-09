@@ -20,8 +20,11 @@ AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectIni
 	DefaultMouseCursor = EMouseCursor::Crosshairs;
 }
 
-void AVoidPlayerController::TakeAbility(TArray<UDataAbility*> ArrayAbility, int32 SearchIndex)
+TArray<int32> AVoidPlayerController::TakeAbility(TArray<UDataAbility*> ArrayAbility, int32 SearchIndex)
 {
+	TArray<int32> EmptyArray;
+	EmptyArray.Empty();
+
 	// find ability
 	UDataAbility *FindedAbility = Ability->FindAbilityById(ArrayAbility, SearchIndex);
 	if (FindedAbility != nullptr)
@@ -33,14 +36,21 @@ void AVoidPlayerController::TakeAbility(TArray<UDataAbility*> ArrayAbility, int3
 			TArray<UDataAbility*> L_NextAbility = FindedAbility->GetNextAbilites();
 			if (L_NextAbility.Num())
 			{
+				TArray<int32> ReturnIndexes;
+				ReturnIndexes.Empty();
 				for (int32 Index = 0; Index < L_NextAbility.Num(); ++Index)
 				{
 					// access ability
-					L_NextAbility[Index]->AccessAbility();
+					if (L_NextAbility[Index]->AccessAbility())
+					{
+						ReturnIndexes.Add(L_NextAbility[Index]->AbilityInfo.ID);
+					}
 				}
+				return ReturnIndexes;
 			}
 		}
 	}
+	return EmptyArray;
 }
 
 void AVoidPlayerController::PlayerTick(float DeltaTime)

@@ -42,7 +42,7 @@ public:
 	если не хватает ничего не делать
 	*/
 	UFUNCTION(BlueprintCallable, Category = "Hero|Ability")
-	void TakeAbility(TArray<UDataAbility*> ArrayAbility, int32 SearchIndex);
+	TArray<int32> TakeAbility(TArray<UDataAbility*> ArrayAbility, int32 SearchIndex);
 
 private:
 	/** If true can camera rotation pitch and yaw */

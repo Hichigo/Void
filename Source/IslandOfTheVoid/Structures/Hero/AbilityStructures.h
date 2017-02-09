@@ -27,6 +27,19 @@ enum class EAbilityType : uint8 {
 	RootBranch
 };
 
+/** Return ability index if taken 
+USTRUCT(BlueprintType)
+struct FAbilityTaken {
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsTaken;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 IndexTaken;
+
+};*/
+
 /** Information about ability */
 USTRUCT(BlueprintType)
 struct FAbility {

@@ -8,6 +8,8 @@
 /**
  * 
  */
+
+
 UCLASS(BlueprintType)
 class ISLANDOFTHEVOID_API UDataAbility : public UDataAsset
 {
