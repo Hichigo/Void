@@ -25,7 +25,7 @@ void UStatComponent::HealthIncrease()
 	if (CheckHealthIncrease())
 	{
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Health.Price;
-		HeroStat.BaseStats.Health.Count += 1;
+		HeroStat.BaseStats.Health.Points += 1;
 
 		HeroStat.BaseStats.Health.CalculateNewPriceMax();
 
@@ -41,7 +41,7 @@ void UStatComponent::EnduranceIncrease()
 	if (CheckEnduranceIncrease())
 	{
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Endurance.Price;
-		HeroStat.BaseStats.Endurance.Count += 1;
+		HeroStat.BaseStats.Endurance.Points += 1;
 
 		HeroStat.BaseStats.Endurance.CalculateNewPriceMax();
 
@@ -57,7 +57,7 @@ void UStatComponent::StrengthIncrease()
 	if (CheckStrengthIncrease())
 	{
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Strength.Price;
-		HeroStat.BaseStats.Strength.Count += 1;
+		HeroStat.BaseStats.Strength.Points += 1;
 
 		HeroStat.BaseStats.Strength.CalculateNewPriceMax();
 		
@@ -73,7 +73,7 @@ void UStatComponent::AgilityIncrease()
 	if (CheckAgilityIncrease())
 	{
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Agility.Price;
-		HeroStat.BaseStats.Agility.Count += 1;
+		HeroStat.BaseStats.Agility.Points += 1;
 
 		HeroStat.BaseStats.Agility.CalculateNewPriceMax();
 		
@@ -89,7 +89,7 @@ void UStatComponent::IntelligenceIncrease()
 	if (CheckIntelligenceIncrease())
 	{
 		HeroStat.Experience = HeroStat.Experience - HeroStat.BaseStats.Intelligence.Price;
-		HeroStat.BaseStats.Intelligence.Count += 1;
+		HeroStat.BaseStats.Intelligence.Points += 1;
 
 		HeroStat.BaseStats.Intelligence.CalculateNewPriceMax();
 		
@@ -98,6 +98,43 @@ void UStatComponent::IntelligenceIncrease()
 		HeroStat.BaseStats.Strength.CalculateNewPriceMin();
 		HeroStat.BaseStats.Agility.CalculateNewPriceMin();
 		
+	}
+}
+
+void UStatComponent::LessHealth(float Damage, EWhereAttack Attack)
+{
+	HeroStat.Total.Health.Current -= Damage;
+
+	switch (Attack)
+	{
+		case EWhereAttack::Head:
+			HeroStat.Head.Health.Current -= Damage;
+			break;
+		case EWhereAttack::Body:
+			HeroStat.Body.Health.Current -= Damage;
+			break;
+		case EWhereAttack::LeftArm:
+			HeroStat.LeftArm.Health.Current -= Damage;
+			break;
+		case EWhereAttack::RightArm:
+			HeroStat.RightArm.Health.Current -= Damage;
+			break;
+		case EWhereAttack::LeftLeg:
+			HeroStat.LeftLeg.Health.Current -= Damage;
+			break;
+		case EWhereAttack::RightLeg:
+			HeroStat.RightLeg.Health.Current -= Damage;
+			break;
+		case EWhereAttack::AllPart:
+			float DivideDamage = Damage / 6.0f;
+
+			HeroStat.Head.Health.Current -= DivideDamage;
+			HeroStat.Body.Health.Current -= DivideDamage;
+			HeroStat.LeftArm.Health.Current -= DivideDamage;
+			HeroStat.RightArm.Health.Current -= DivideDamage;
+			HeroStat.LeftLeg.Health.Current -= DivideDamage;
+			HeroStat.RightLeg.Health.Current -= DivideDamage;
+			break;
 	}
 }
 
@@ -119,6 +156,8 @@ void UStatComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
+	
+
 	HeroStat.Experience = 9999;
 
 	HeroStat.Endurance.Current = 50;
@@ -134,39 +173,46 @@ void UStatComponent::BeginPlay()
 #undef LOCTEXT_NAMESPACE
 
 	//Health base stats
-	HeroStat.BaseStats.Health.Count = 8;
+	HeroStat.BaseStats.Health.Points = 8;
 	HeroStat.BaseStats.Health.Price = 100;
 	HeroStat.BaseStats.Health.BasePrice = 10;
 	HeroStat.BaseStats.Health.MinFactor = 1.1f;
 	HeroStat.BaseStats.Health.MaxFactor = 1.5f;
 
 	//Endurance base stats
-	HeroStat.BaseStats.Endurance.Count = 8;
+	HeroStat.BaseStats.Endurance.Points = 8;
 	HeroStat.BaseStats.Endurance.Price = 100;
 	HeroStat.BaseStats.Endurance.BasePrice = 10;
 	HeroStat.BaseStats.Endurance.MinFactor = 1.1f;
 	HeroStat.BaseStats.Endurance.MaxFactor = 1.5f;
 
 	//Strength base stats
-	HeroStat.BaseStats.Strength.Count = 8;
+	HeroStat.BaseStats.Strength.Points = 8;
 	HeroStat.BaseStats.Strength.Price = 100;
 	HeroStat.BaseStats.Strength.BasePrice = 10;
 	HeroStat.BaseStats.Strength.MinFactor = 1.1f;
 	HeroStat.BaseStats.Strength.MaxFactor = 1.5f;
 
 	//Agility base stats
-	HeroStat.BaseStats.Agility.Count = 8;
+	HeroStat.BaseStats.Agility.Points = 8;
 	HeroStat.BaseStats.Agility.Price = 100;
 	HeroStat.BaseStats.Agility.BasePrice = 10;
 	HeroStat.BaseStats.Agility.MinFactor = 1.1f;
 	HeroStat.BaseStats.Agility.MaxFactor = 1.5f;
 
 	//Intelligence base stats
-	HeroStat.BaseStats.Intelligence.Count = 8;
+	HeroStat.BaseStats.Intelligence.Points = 8;
 	HeroStat.BaseStats.Intelligence.Price = 100;
 	HeroStat.BaseStats.Intelligence.BasePrice = 10;
 	HeroStat.BaseStats.Intelligence.MinFactor = 1.1f;
 	HeroStat.BaseStats.Intelligence.MaxFactor = 1.5f;
+
+	HeroStat.BaseStats.RegenerationHealth = 1.0f;
+
+
+	HeroStat.BaseStats.KHealth = 10.0f;
+
+	HeroStat.RecalculateBodyPartHealth();
 }
 
 
@@ -181,6 +227,54 @@ void UStatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 	if (IsNotFullHealth())
 	{
 		// to do rengeneration total hp and body part
+		HeroStat.Total.Health.Current += HeroStat.BaseStats.RegenerationHealth * DeltaTime;
+
+		TArray<FBodyPart*> RegeneratingParts;
+		if (HeroStat.Head.Health.Current < HeroStat.Head.Health.Max)
+		{
+			RegeneratingParts.Add(&HeroStat.Head);
+		}
+		if (HeroStat.Body.Health.Current < HeroStat.Body.Health.Max)
+		{
+			RegeneratingParts.Add(&HeroStat.Body);
+		}
+		if (HeroStat.LeftArm.Health.Current < HeroStat.LeftArm.Health.Max)
+		{
+			RegeneratingParts.Add(&HeroStat.LeftArm);
+		}
+		if (HeroStat.RightArm.Health.Current < HeroStat.RightArm.Health.Max)
+		{
+			RegeneratingParts.Add(&HeroStat.RightArm);
+		}
+		if (HeroStat.LeftLeg.Health.Current < HeroStat.LeftLeg.Health.Max)
+		{
+			RegeneratingParts.Add(&HeroStat.LeftLeg);
+		}
+		if (HeroStat.RightLeg.Health.Current < HeroStat.RightLeg.Health.Max)
+		{
+			RegeneratingParts.Add(&HeroStat.RightLeg);
+		}
+
+		float RegenPerPart = HeroStat.BaseStats.RegenerationHealth * DeltaTime / (float)RegeneratingParts.Num();
+
+		for (auto part : RegeneratingParts)
+		{
+			part->Health.Current += RegenPerPart;
+		}
+
+		if (HeroStat.Total.Health.Current > HeroStat.Total.Health.Max)
+		{
+			HeroStat.Total.Health.Current = HeroStat.Total.Health.Max;
+
+			HeroStat.Head.Health.Current = HeroStat.Head.Health.Current;
+			HeroStat.Body.Health.Current = HeroStat.Body.Health.Current;
+			HeroStat.LeftArm.Health.Current = HeroStat.LeftArm.Health.Current;
+			HeroStat.RightArm.Health.Current = HeroStat.RightArm.Health.Current;
+			HeroStat.LeftLeg.Health.Current = HeroStat.LeftLeg.Health.Current;
+			HeroStat.RightLeg.Health.Current = HeroStat.RightLeg.Health.Current;
+
+		}
+
 	}
 
 	if (IsNotFullEndurance())

@@ -41,6 +41,10 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Hero stats")
 	void IntelligenceIncrease();
 
+	/** Less health */
+	UFUNCTION(BlueprintCallable, Category = "Hero stats")
+	void LessHealth(float Damage, EWhereAttack Attack);
+
 	bool ReduceExperience(int32 HowMuch);
 
 protected:

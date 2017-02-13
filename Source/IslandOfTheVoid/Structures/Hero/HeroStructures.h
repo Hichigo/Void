@@ -18,6 +18,21 @@ enum class EMoveType : uint8
 	Crawling
 };
 
+/**
+* Enumeration where attack enemy or character
+*/
+UENUM(BlueprintType)
+enum class EWhereAttack : uint8
+{
+	Head,
+	Body,
+	LeftArm,
+	RightArm,
+	LeftLeg,
+	RightLeg,
+	AllPart
+};
+
 
 /**
  * Struct for progress bar like a health or Endurance etc.
@@ -230,25 +245,25 @@ struct FMovement {
 	* Running speed
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	float Run;
+	float RunSpeed;
 
 	/**
 	* Walking speed
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	float Walk;
+	float WalkSpeed;
 
 	/**
 	* Crouching speed
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	float Crouch;
+	float CrouchSpeed;
 
 	/**
 	* Crawling speed
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	float Crawl;
+	float CrawlSpeed;
 
 };
 
@@ -269,7 +284,7 @@ struct FStat {
 	* Number of points stat
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
-	int32 Count;
+	int32 Points;
 
 	/**
 	* Price for increase
@@ -348,6 +363,12 @@ struct FBaseStats {
 	FStat Intelligence;
 
 	/**
+	* Coefficient health per one point
+	*/
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	float KHealth;
+
+	/**
 	* Regenration per second health
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
@@ -384,7 +405,7 @@ struct FHeroStats {
 	*/
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	FBodyPart Total;
-
+	
 	/**
 	* Total Endurance
 	*/
@@ -433,6 +454,33 @@ struct FHeroStats {
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
 	FMovement Movement;
 
+public:
+	/** Recalculate health  */
+	void RecalculateBodyPartHealth()
+	{
+		Total.Health.Max = BaseStats.Health.Points * BaseStats.KHealth;
+
+		Total.Health.Current = Total.Health.Max;
+		
+		float LimbsHealth = Total.Health.Max / 4.0f;
+		
+		Head.Health.Current = Total.Health.Max;
+		Body.Health.Current = Total.Health.Max;
+
+		LeftArm.Health.Current = LimbsHealth;
+		RightArm.Health.Current = LimbsHealth;
+		LeftLeg.Health.Current = LimbsHealth;
+		RightLeg.Health.Current = LimbsHealth;
+
+		Head.Health.Max = Total.Health.Max;
+		Body.Health.Max = Total.Health.Max;
+
+		LeftArm.Health.Max = LimbsHealth;
+		RightArm.Health.Max = LimbsHealth;
+		LeftLeg.Health.Max = LimbsHealth;
+		RightLeg.Health.Max = LimbsHealth;
+
+	}
 };
 
 UCLASS()
