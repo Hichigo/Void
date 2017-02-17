@@ -9,9 +9,6 @@ AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectIni
 {
 	bCameraRotation = false;
 
-	WalkCharacterSpeed = 150.f;
-	RunCharacterSpeed = 600.f;
-
 	SpeedCameraTilt = 5.0f;
 	SpeedCameraZoom = 20.0f;
 	
@@ -60,7 +57,13 @@ void AVoidPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
+	bool bCame = CharacterRef->GetActorLocation().Equals(Goal, 120.0);
 
+	if (bCame)
+	{
+		CharacterRef->GetCharacterMovement()->MaxWalkSpeed = WalkCharacterSpeed;
+		Goal.Set(-999.0, -999.0, -999.0);
+	}
 }
 
 void AVoidPlayerController::SetupInputComponent()
@@ -100,13 +103,14 @@ void AVoidPlayerController::MoveCharacterToCursor()
 		if (NavSys && (Distance > 120.0f))
 		{
 			NavSys->SimpleMoveToLocation(this, Hit.ImpactPoint);
+			Goal = Hit.ImpactPoint;
 		}
 	}
 }
 
 void AVoidPlayerController::OnRightMousePressed()
 {
-	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = WalkCharacterSpeed;
+	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.WalkSpeed;
 	
 	MoveCharacterToCursor();
 	
@@ -114,7 +118,7 @@ void AVoidPlayerController::OnRightMousePressed()
 
 void AVoidPlayerController::OnRightMouseDoublePressed()
 {
-	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = RunCharacterSpeed;
+	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.RunSpeed;
 	
 	MoveCharacterToCursor();
 }

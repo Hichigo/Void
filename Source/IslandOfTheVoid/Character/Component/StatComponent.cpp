@@ -160,6 +160,10 @@ void UStatComponent::BeginPlay()
 
 	HeroStat.Experience = 9999;
 
+	HeroStat.Movement.WalkSpeed = 200;
+	HeroStat.Movement.RunSpeed = 600;
+
+
 	HeroStat.Endurance.Current = 50;
 	HeroStat.Endurance.Max = 50;
 
@@ -276,6 +280,8 @@ void UStatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 		}
 
 	}
+
+	if()
 
 	if (IsNotFullEndurance())
 	{

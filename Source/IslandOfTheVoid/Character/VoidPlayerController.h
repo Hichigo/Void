@@ -27,15 +27,6 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Setting")
 	float SpeedCameraZoom;
 	
-	/** Walk character speed */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
-	float WalkCharacterSpeed;
-
-	/** Run character speed */
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
-	float RunCharacterSpeed;
-
-
 	/** Returns Ability component subobject **/
 	FORCEINLINE class UAbilityComponent* GetAbility() const { return Ability; }
 
@@ -56,6 +47,9 @@ public:
 private:
 	/** If true can camera rotation pitch and yaw */
 	bool bCameraRotation;
+
+	/** Where the character goes */
+	FVector Goal;
 
 	/** Reference main character */
 	AVoidCharacter *CharacterRef;
