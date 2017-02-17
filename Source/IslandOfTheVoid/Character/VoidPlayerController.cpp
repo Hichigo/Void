@@ -68,9 +68,10 @@ void AVoidPlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	InputComponent->BindAction("RightMouse", IE_Pressed, this, &AVoidPlayerController::OnRightMousePressed);
+	InputComponent->BindAction("RightMouse", IE_DoubleClick, this, &AVoidPlayerController::OnRightMouseDoublePressed);
 	InputComponent->BindAction("MiddleMouse", IE_Pressed, this, &AVoidPlayerController::OnMiddleMousePressed);
 	InputComponent->BindAction("MiddleMouse", IE_Released, this, &AVoidPlayerController::OnMiddleMouseRelease);
-
+	
 	InputComponent->BindAxis("CameraTilt", this, &AVoidPlayerController::OnCameraTilt);
 	InputComponent->BindAxis("CameraRotation", this, &AVoidPlayerController::OnCameraRotation);
 	InputComponent->BindAxis("CameraZoom", this, &AVoidPlayerController::OnCameraZoom);
@@ -84,10 +85,8 @@ void AVoidPlayerController::BeginPlay()
 	CharacterRef = Cast<AVoidCharacter>(GetPawn());
 }
 
-void AVoidPlayerController::OnRightMousePressed()
+void AVoidPlayerController::MoveCharacterToCursor()
 {
-	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = WalkCharacterSpeed;
-	
 	APawn* const MyPawn = GetPawn();
 	if (MyPawn)
 	{
@@ -103,6 +102,21 @@ void AVoidPlayerController::OnRightMousePressed()
 			NavSys->SimpleMoveToLocation(this, Hit.ImpactPoint);
 		}
 	}
+}
+
+void AVoidPlayerController::OnRightMousePressed()
+{
+	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = WalkCharacterSpeed;
+	
+	MoveCharacterToCursor();
+	
+}
+
+void AVoidPlayerController::OnRightMouseDoublePressed()
+{
+	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = RunCharacterSpeed;
+	
+	MoveCharacterToCursor();
 }
 
 void AVoidPlayerController::OnMiddleMousePressed()

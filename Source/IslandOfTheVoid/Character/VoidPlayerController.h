@@ -81,7 +81,13 @@ private:
 	virtual void BeginPlay() override;
 
 	/** Move character to cursor */
+	void MoveCharacterToCursor();
+
+	/** Walk character to cursor */
 	void OnRightMousePressed();
+
+	/** Run character to cursor */
+	void OnRightMouseDoublePressed();
 
 	/** Middle mouse button pressed */
 	void OnMiddleMousePressed();
