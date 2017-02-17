@@ -9,6 +9,9 @@ AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectIni
 {
 	bCameraRotation = false;
 
+	WalkCharacterSpeed = 150.f;
+	RunCharacterSpeed = 600.f;
+
 	SpeedCameraTilt = 5.0f;
 	SpeedCameraZoom = 20.0f;
 	
@@ -57,6 +60,7 @@ void AVoidPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
+
 }
 
 void AVoidPlayerController::SetupInputComponent()
@@ -82,6 +86,8 @@ void AVoidPlayerController::BeginPlay()
 
 void AVoidPlayerController::OnRightMousePressed()
 {
+	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = WalkCharacterSpeed;
+	
 	APawn* const MyPawn = GetPawn();
 	if (MyPawn)
 	{

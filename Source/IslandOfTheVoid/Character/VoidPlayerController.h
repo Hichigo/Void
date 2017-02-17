@@ -26,6 +26,15 @@ public:
 	/** Speed camera zoom */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera Setting")
 	float SpeedCameraZoom;
+	
+	/** Walk character speed */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
+	float WalkCharacterSpeed;
+
+	/** Run character speed */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Character")
+	float RunCharacterSpeed;
+
 
 	/** Returns Ability component subobject **/
 	FORCEINLINE class UAbilityComponent* GetAbility() const { return Ability; }
