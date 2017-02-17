@@ -17,7 +17,7 @@ AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectIni
 	Ability = ObjectInitializer.CreateDefaultSubobject<UAbilityComponent>(this, TEXT("Ability"));
 	
 	bShowMouseCursor = true;
-	DefaultMouseCursor = EMouseCursor::Crosshairs;
+	DefaultMouseCursor = EMouseCursor::Hand;
 }
 
 TArray<int32> AVoidPlayerController::TakeAbility(TArray<UDataAbility*> ArrayAbility, int32 SearchIndex)
@@ -61,7 +61,7 @@ void AVoidPlayerController::PlayerTick(float DeltaTime)
 
 	if (bCame)
 	{
-		CharacterRef->GetCharacterMovement()->MaxWalkSpeed = WalkCharacterSpeed;
+		CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.WalkSpeed;
 		Goal.Set(-999.0, -999.0, -999.0);
 	}
 }
@@ -111,6 +111,7 @@ void AVoidPlayerController::MoveCharacterToCursor()
 void AVoidPlayerController::OnRightMousePressed()
 {
 	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.WalkSpeed;
+	//Stat->GetAllStats().Movement.Type = EMoveType::Walking;
 	
 	MoveCharacterToCursor();
 	
@@ -119,7 +120,8 @@ void AVoidPlayerController::OnRightMousePressed()
 void AVoidPlayerController::OnRightMouseDoublePressed()
 {
 	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.RunSpeed;
-	
+	//Stat->GetAllStats().Movement.Type = EMoveType::Runnig;
+
 	MoveCharacterToCursor();
 }
 

@@ -2,6 +2,7 @@
 
 #pragma once
 #include "Structures/Hero/HeroStructures.h"
+//#include "Character/VoidPlayerController.h"
 #include "Components/ActorComponent.h"
 #include "StatComponent.generated.h"
 
@@ -61,6 +62,9 @@ private:
 	/** All stats hero */
 	FHeroStats HeroStat;
 		
+	/** Reference main character */
+//	AVoidCharacter *CharacterRef;
+
 	/** Check experience for health increase */
 	bool CheckHealthIncrease();
 	/** Check experience for Endurance increase */

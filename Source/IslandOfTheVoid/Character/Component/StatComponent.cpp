@@ -13,9 +13,6 @@ UStatComponent::UStatComponent()
 	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
-	
-	
-
 
 }
 
@@ -281,7 +278,15 @@ void UStatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 	}
 
-	if()
+	/*if (HeroStat.Movement.Type == EMoveType::Runnig)
+	{
+		HeroStat.Endurance.Current -= 2.0f;
+		if (HeroStat.Endurance.Current <= 0.0f)
+		{
+			HeroStat.Endurance.Current = 0.0f;
+//			CharacterRef->GetCharacterMovement()->MaxWalkSpeed = HeroStat.Movement.WalkSpeed;
+		}
+	}*/
 
 	if (IsNotFullEndurance())
 	{
