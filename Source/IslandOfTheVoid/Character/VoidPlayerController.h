@@ -44,6 +44,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Hero|Ability")
 	TArray<int32> TakeAbility(TArray<UDataAbility*> ArrayAbility, int32 SearchIndex);
 
+	/** Return character reference */
+	FORCEINLINE AVoidCharacter* GetCharacterRef() { return CharacterRef; }
+
 private:
 	/** If true can camera rotation pitch and yaw */
 	bool bCameraRotation;

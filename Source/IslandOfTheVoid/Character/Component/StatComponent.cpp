@@ -154,6 +154,7 @@ void UStatComponent::BeginPlay()
 
 	// ...
 	
+	SetMovemetType(EMoveType::Walking);
 
 	HeroStat.Experience = 9999;
 
@@ -209,7 +210,7 @@ void UStatComponent::BeginPlay()
 	HeroStat.BaseStats.Intelligence.MaxFactor = 1.5f;
 
 	HeroStat.BaseStats.RegenerationHealth = 1.0f;
-
+	HeroStat.BaseStats.RegenerationEndurance = 3.0f;
 
 	HeroStat.BaseStats.KHealth = 10.0f;
 
@@ -278,20 +279,24 @@ void UStatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 
 	}
 
-	/*if (HeroStat.Movement.Type == EMoveType::Runnig)
+	if (HeroStat.Movement.Type == EMoveType::Running)
 	{
-		HeroStat.Endurance.Current -= 2.0f;
+		HeroStat.Endurance.Current -= 10.0f * DeltaTime;
 		if (HeroStat.Endurance.Current <= 0.0f)
 		{
 			HeroStat.Endurance.Current = 0.0f;
-//			CharacterRef->GetCharacterMovement()->MaxWalkSpeed = HeroStat.Movement.WalkSpeed;
-		}
-	}*/
 
-	if (IsNotFullEndurance())
+			SetMovemetType(EMoveType::Walking);
+
+			AVoidPlayerController *PC = Cast<AVoidPlayerController>(UGameplayStatics::GetPlayerController(GetWorld(), 0));
+			PC->GetCharacterRef()->GetCharacterMovement()->MaxWalkSpeed = HeroStat.Movement.WalkSpeed;
+//			CharacterRef
+		}
+	}
+	else if (IsNotFullEndurance())
 	{
 		// increase Endurance
-		HeroStat.Endurance.Current += HeroStat.BaseStats.RegenerationEndurance;
+		HeroStat.Endurance.Current += HeroStat.BaseStats.RegenerationEndurance * DeltaTime;
 
 		// endurance check to not exceed a maximum of
 		if (HeroStat.Endurance.Current > HeroStat.Endurance.Max)
@@ -299,6 +304,11 @@ void UStatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorC
 			HeroStat.Endurance.Current = HeroStat.Endurance.Max;
 		}
 	}
+}
+
+void UStatComponent::SetMovemetType(EMoveType NewType)
+{
+	HeroStat.Movement.Type = NewType;
 }
 
 bool UStatComponent::CheckHealthIncrease()

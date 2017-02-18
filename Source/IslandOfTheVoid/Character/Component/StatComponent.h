@@ -2,7 +2,7 @@
 
 #pragma once
 #include "Structures/Hero/HeroStructures.h"
-//#include "Character/VoidPlayerController.h"
+#include "Character/VoidPlayerController.h"
 #include "Components/ActorComponent.h"
 #include "StatComponent.generated.h"
 
@@ -56,6 +56,8 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	/** Set new movement type  */
+	void SetMovemetType(EMoveType NewType);
 
 private:
 

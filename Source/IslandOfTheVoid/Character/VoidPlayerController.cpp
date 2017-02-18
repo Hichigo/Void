@@ -57,12 +57,22 @@ void AVoidPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
 
-	bool bCame = CharacterRef->GetActorLocation().Equals(Goal, 120.0);
+	bool bCame = false;
+
+	/** Without this check crash editor */
+	if(CharacterRef != nullptr)
+		bCame = CharacterRef->GetActorLocation().Equals(Goal, 120.0);
 
 	if (bCame)
 	{
-		CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.WalkSpeed;
 		Goal.Set(-999.0, -999.0, -999.0);
+		if (Stat->GetAllStats().Movement.Type == EMoveType::Running)
+		{
+			CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.WalkSpeed;
+			Stat->SetMovemetType(EMoveType::Walking);
+		}
+		
+		
 	}
 }
 
@@ -111,7 +121,7 @@ void AVoidPlayerController::MoveCharacterToCursor()
 void AVoidPlayerController::OnRightMousePressed()
 {
 	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.WalkSpeed;
-	//Stat->GetAllStats().Movement.Type = EMoveType::Walking;
+	Stat->SetMovemetType(EMoveType::Walking);
 	
 	MoveCharacterToCursor();
 	
@@ -120,7 +130,7 @@ void AVoidPlayerController::OnRightMousePressed()
 void AVoidPlayerController::OnRightMouseDoublePressed()
 {
 	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.RunSpeed;
-	//Stat->GetAllStats().Movement.Type = EMoveType::Runnig;
+	Stat->SetMovemetType(EMoveType::Running);
 
 	MoveCharacterToCursor();
 }

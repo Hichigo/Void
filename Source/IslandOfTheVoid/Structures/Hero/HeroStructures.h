@@ -12,7 +12,7 @@
 UENUM(BlueprintType)
 enum class EMoveType : uint8
 {
-	Runnig,
+	Running,
 	Walking,
 	Crouching,
 	Crawling
