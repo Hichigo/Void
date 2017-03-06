@@ -108,9 +108,12 @@ void AVoidPlayerController::MoveCharacterToCursor()
 
 		UNavigationSystem* const NavSys = GetWorld()->GetNavigationSystem();
 		float const Distance = FVector::Dist(Hit.ImpactPoint, MyPawn->GetActorLocation());
-
+		//float PathLength = 0.0;
+		//NavSys->GetPathLength(MyPawn->GetActorLocation(), Hit.ImpactPoint, PathLength);
+		//tpath = NavSys->FindPathToLocationSynchronously(GetWorld(), MyPawn->GetActorLocation(), Hit.ImpactPoint);
+		//UE_LOG(LogTemp, Warning, TEXT("dist: %f; path: %f;"), Distance, PathLength);
 		// We need to issue move command only if far enough in order for walk animation to play correctly
-		if (NavSys && (Distance > 120.0f))
+		if (NavSys && (Distance > 120.0f)/* && tpath->PathPoints.Num()*/ /*&& (PathLength >= Distance)*/)
 		{
 			NavSys->SimpleMoveToLocation(this, Hit.ImpactPoint);
 			Goal = Hit.ImpactPoint;
@@ -131,7 +134,7 @@ void AVoidPlayerController::OnRightMouseDoublePressed()
 {
 	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.RunSpeed;
 	Stat->SetMovemetType(EMoveType::Running);
-
+	
 	MoveCharacterToCursor();
 }
 

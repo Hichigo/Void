@@ -4,6 +4,7 @@
 #include "VoidCharacter.h"
 #include "Component/StatComponent.h"
 #include "Component/AbilityComponent.h"
+//#include "Runtime/Engine/Classes/AI/Navigation/NavigationPath.h"
 #include "GameFramework/PlayerController.h"
 #include "VoidPlayerController.generated.h"
 
@@ -56,6 +57,8 @@ private:
 
 	/** Reference main character */
 	AVoidCharacter *CharacterRef;
+
+	//UNavigationPath *tpath;
 
 	/** Remember mouse position when rotate camera */
 	FVector2D MousePosition;
