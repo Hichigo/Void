@@ -1,5 +1,7 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 #pragma once
+#include "AI/Navigation/NavigationSystem.h"
+#include "GameFramework/PlayerController.h"
 #include "GameFramework/Character.h"
 #include "IslandOfTheVoidCharacter.generated.h"
 

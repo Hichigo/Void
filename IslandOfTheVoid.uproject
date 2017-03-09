@@ -9,7 +9,8 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"CoreUObject"
+				"CoreUObject",
+				"Engine"
 			]
 		}
 	],
@@ -114,5 +115,8 @@
 			"Name": "SteamVR",
 			"Enabled": false
 		}
+	],
+	"TargetPlatforms": [
+		"AllDesktop"
 	]
 }
