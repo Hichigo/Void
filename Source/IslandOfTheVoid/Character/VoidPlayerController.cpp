@@ -17,6 +17,10 @@ AVoidPlayerController::AVoidPlayerController(const FObjectInitializer& ObjectIni
 	Ability = ObjectInitializer.CreateDefaultSubobject<UAbilityComponent>(this, TEXT("Ability"));
 	
 	bShowMouseCursor = true;
+	bEnableMouseOverEvents = true;
+	bEnableClickEvents = true;
+	bEnableTouchEvents = false;
+
 	DefaultMouseCursor = EMouseCursor::Hand;
 }
 
