@@ -127,6 +127,10 @@ void AVoidPlayerController::MoveCharacterToCursor()
 
 void AVoidPlayerController::OnRightMousePressed()
 {
+	FHitResult Hit;
+	GetHitResultUnderCursor(ECC_Visibility, true, Hit);
+	UE_LOG(LogTemp, Warning, TEXT("string %s"), *Hit.Actor->GetName());
+
 	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.WalkSpeed;
 	Stat->SetMovemetType(EMoveType::Walking);
 	
