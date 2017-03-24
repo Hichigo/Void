@@ -1,11 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
-
 #include "Character/Ability/DataAbility.h"
 #include "Character/Component/StatComponent.h"
-#include "Components/ActorComponent.h"
+//#include "Components/ActorComponent.h"
 #include "AbilityComponent.generated.h"
 
 

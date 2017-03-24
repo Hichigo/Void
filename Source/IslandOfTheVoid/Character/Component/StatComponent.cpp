@@ -209,7 +209,7 @@ void UStatComponent::BeginPlay()
 	HeroStat.BaseStats.Intelligence.MinFactor = 1.1f;
 	HeroStat.BaseStats.Intelligence.MaxFactor = 1.5f;
 
-	HeroStat.BaseStats.RegenerationHealth = 1.0f;
+	HeroStat.BaseStats.RegenerationHealth = 0.0f;
 	HeroStat.BaseStats.RegenerationEndurance = 3.0f;
 
 	HeroStat.BaseStats.KHealth = 10.0f;
