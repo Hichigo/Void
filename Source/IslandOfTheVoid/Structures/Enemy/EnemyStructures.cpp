@@ -3,10 +3,6 @@
 #include "IslandOfTheVoid.h"
 #include "EnemyStructures.h"
 
-EnemyStructures::EnemyStructures()
-{
-}
 
-EnemyStructures::~EnemyStructures()
-{
-}
+
+

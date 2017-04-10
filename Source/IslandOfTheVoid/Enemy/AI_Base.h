@@ -29,7 +29,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Enemy)
-	EActionEnemy MainAction;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
+	FEnemyStats MainStats;
 	
 };
