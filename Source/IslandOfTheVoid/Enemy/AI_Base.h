@@ -31,5 +31,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
 	FEnemyStats MainStats;
-	
+
+	UPROPERTY(EditAnywhere, Category = "Behavior")
+	class UBehaviorTree *Behavior;
+
+	UPROPERTY(EditAnywhere, Category = "Behavior")
+	class USplineComponent *PatrolPath;
 };
