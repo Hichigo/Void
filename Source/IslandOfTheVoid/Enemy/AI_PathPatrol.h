@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "Classes/Components/SplineComponent.h"
 #include "AI_PathPatrol.generated.h"
 
 UCLASS()
@@ -12,7 +13,7 @@ class ISLANDOFTHEVOID_API AAI_PathPatrol : public AActor
 	
 public:	
 	// Sets default values for this actor's properties
-	AAI_PathPatrol();
+	AAI_PathPatrol(const FObjectInitializer& ObjectInitializer);
 
 protected:
 	// Called when the game starts or when spawned
@@ -23,5 +24,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	
+	FORCEINLINE USplineComponent* GetSpline() const { return Spline; }
 	
+private:
+	class USplineComponent *Spline;
+
 };

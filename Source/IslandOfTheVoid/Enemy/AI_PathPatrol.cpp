@@ -5,11 +5,15 @@
 
 
 // Sets default values
-AAI_PathPatrol::AAI_PathPatrol()
+AAI_PathPatrol::AAI_PathPatrol(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Spline = ObjectInitializer.CreateDefaultSubobject<USplineComponent>(this, TEXT("Spline"));
+
+	
 }
 
 // Called when the game starts or when spawned

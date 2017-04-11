@@ -4,6 +4,7 @@
 
 #include "GameFramework/Character.h"
 #include "Structures/Enemy/EnemyStructures.h"
+#include "Enemy/AI_PathPatrol.h"
 
 #include "AI_Base.generated.h"
 
@@ -36,5 +37,5 @@ public:
 	class UBehaviorTree *Behavior;
 
 	UPROPERTY(EditAnywhere, Category = "Behavior")
-	class USplineComponent *PatrolPath;
+	class AAI_PathPatrol *PatrolPath;
 };
