@@ -13,7 +13,6 @@ AAI_PathPatrol::AAI_PathPatrol(const FObjectInitializer& ObjectInitializer)
 
 	Spline = ObjectInitializer.CreateDefaultSubobject<USplineComponent>(this, TEXT("Spline"));
 
-	
 }
 
 // Called when the game starts or when spawned

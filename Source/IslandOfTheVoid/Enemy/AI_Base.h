@@ -38,4 +38,7 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Behavior")
 	class AAI_PathPatrol *PatrolPath;
+
+	UPROPERTY(EditAnywhere, Category = "Behavior")
+	int32 StartPointPatrol;
 };

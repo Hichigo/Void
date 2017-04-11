@@ -6,6 +6,7 @@
 
 // Sets default values
 AAI_Base::AAI_Base()
+	:	StartPointPatrol(0)
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -18,6 +19,19 @@ void AAI_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
+
+	if ( PatrolPath != nullptr )
+	{
+		const int32 NumOfSplinePoints = PatrolPath->GetSpline()->GetNumberOfSplinePoints();
+
+		if ( (StartPointPatrol < 0) || (StartPointPatrol > NumOfSplinePoints) )
+		{
+			StartPointPatrol = 0;
+
+			
+			
+		}
+	}
 }
 
 // Called every frame
