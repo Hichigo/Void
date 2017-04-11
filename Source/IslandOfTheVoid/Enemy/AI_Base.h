@@ -30,7 +30,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Enemy")
+	UPROPERTY(EditAnywhere, Category = "Enemy")
 	FEnemyStats MainStats;
 
 	UPROPERTY(EditAnywhere, Category = "Behavior")

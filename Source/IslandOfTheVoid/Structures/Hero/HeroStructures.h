@@ -44,13 +44,13 @@ struct FBar {
 	/**
 	* Current value <= Max
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Current;
 
 	/**
 	 * Maximum value	
 	 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Max;
 };
 
@@ -64,13 +64,13 @@ struct FDamage {
 	/**
 	* Current value <= Max
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Min;
 
 	/**
 	* Maximum value
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Max;
 };
 
@@ -84,25 +84,25 @@ struct FPhysicalResist {
 	/**
 	* Resist stabbing damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Stab;
 
 	/**
 	* Resist crushing damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Crush;
 
 	/**
 	* Resist chopping damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Chop;
 
 	/**
 	* Resist cutting damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Cut;
 };
 
@@ -116,25 +116,25 @@ struct FMagicResist {
 	/**
 	* Resist fire damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Fire;
 
 	/**
 	* Resist cold damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Cold;
 
 	/**
 	* Resist lightning damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Lightning;
 
 	/**
 	* Resist poison damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float Poison;
 };
 
@@ -148,25 +148,25 @@ struct FPhysicalDamage {
 	/**
 	* Stabbing damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FDamage Stab;
 
 	/**
 	* Crushing damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FDamage Crush;
 
 	/**
 	* Chopping damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FDamage Chop;
 
 	/**
 	* Cutting damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FDamage Cut;
 };
 
@@ -180,25 +180,25 @@ struct FMagicDamage {
 	/**
 	* Fire damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FDamage Fire;
 
 	/**
 	* Cold damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FDamage Cold;
 
 	/**
 	* Lightning damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FDamage Lightning;
 
 	/**
 	* Poison damage
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FDamage Poison;
 };
 
@@ -212,19 +212,19 @@ struct FBodyPart {
 	/**
 	* Health part
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FBar Health;
 
 	/**
 	* Physical resist part
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FPhysicalResist PhysicalResist;
 
 	/**
 	* Magic resist part
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FMagicResist MagicResist;
 };
 
@@ -238,31 +238,31 @@ struct FMovement {
 	/**
 	* Move type
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EMoveType Type;
 
 	/**
 	* Running speed
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float RunSpeed;
 
 	/**
 	* Walking speed
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float WalkSpeed;
 
 	/**
 	* Crouching speed
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float CrouchSpeed;
 
 	/**
 	* Crawling speed
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float CrawlSpeed;
 
 };
@@ -277,38 +277,38 @@ struct FStat {
 	/**
 	* Text name stat
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FText NameStat;
 
 	/**
 	* Number of points stat
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Points;
 
 	/**
 	* Price for increase
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Price;
 
 
 	/**
 	* Price for increase
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 BasePrice;
 
 	/**
 	* The coefficient for attributes that did not increase
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float MinFactor;
 
 	/**
 	* The coefficient for attributes that did increase
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float MaxFactor;
 
 public:
@@ -335,49 +335,49 @@ struct FBaseStats {
 	/**
 	* Health stat
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FStat Health;
 
 	/**
 	* Endurance stat
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FStat Endurance;
 
 	/**
 	* Strength stat
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FStat Strength;
 
 	/**
 	* Agility stat
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FStat Agility;
 
 	/**
 	* Intelligence stat
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FStat Intelligence;
 
 	/**
 	* Coefficient health per one point
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float KHealth;
 
 	/**
 	* Regenration per second health
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float RegenerationHealth;
 
 	/**
 	* Regenration per second Endurance
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	float RegenerationEndurance;
 };
 
@@ -391,67 +391,67 @@ struct FHeroStats {
 	/**
 	* Base stats character
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FBaseStats BaseStats;
 
 	/**
 	* Experience character
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	int32 Experience;
 
 	/**
 	* Total health and resist
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FBodyPart Total;
 	
 	/**
 	* Total Endurance
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FBar Endurance;
 
 	/**
 	* Head health and resist
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FBodyPart Head;
 
 	/**
 	* Body health and resist
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FBodyPart Body;
 
 	/**
 	* Left arm health and resist
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FBodyPart LeftArm;
 
 	/**
 	* Right arm health and resist
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FBodyPart RightArm;
 
 	/**
 	* Left leg health and resist
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FBodyPart LeftLeg;
 
 	/**
 	* Right leg health and resist
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FBodyPart RightLeg;
 
 	/**
 	* Hero movement
 	*/
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FMovement Movement;
 
 public:
