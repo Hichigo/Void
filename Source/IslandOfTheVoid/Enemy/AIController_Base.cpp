@@ -24,7 +24,7 @@ AAIController_Base::AAIController_Base(const FObjectInitializer& ObjectInitializ
 	//Sence.BindUFunction(this, "OnPerceptionUpdated");
 
 	AIPerception->OnPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnPerceptionUpdated);
-		
+	AIPerception->OnTargetPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnTartgetPerceptionUpdated);
 		//->OnTargetPerceptionUpdated.//__Internal_AddDynamic(this, &AAIController_Base::OnPerceptionUpdated);
 }
 
@@ -39,6 +39,10 @@ void AAIController_Base::BeginPlay()
 }
 
 void AAIController_Base::OnPerceptionUpdated(TArray<AActor*> Actors)
+{
+}
+
+void AAIController_Base::OnTartgetPerceptionUpdated(AActor *Actors, FAIStimulus Stimulus)
 {
 }
 

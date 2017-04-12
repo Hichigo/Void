@@ -33,4 +33,5 @@ private:
 	//TScriptDelegate<> Sence;
 
 	void OnPerceptionUpdated(TArray<AActor*> Actors);
+	void OnTartgetPerceptionUpdated(AActor *Actors, FAIStimulus Stimulus);
 };
