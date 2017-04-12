@@ -25,7 +25,7 @@ AAIController_Base::AAIController_Base(const FObjectInitializer& ObjectInitializ
 
 	AIPerception->OnPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnPerceptionUpdated);
 	AIPerception->OnTargetPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnTartgetPerceptionUpdated);
-		//->OnTargetPerceptionUpdated.//__Internal_AddDynamic(this, &AAIController_Base::OnPerceptionUpdated);
+
 }
 
 void AAIController_Base::BeginPlay()
