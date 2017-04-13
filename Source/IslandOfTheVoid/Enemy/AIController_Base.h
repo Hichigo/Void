@@ -18,6 +18,9 @@ class ISLANDOFTHEVOID_API AAIController_Base : public AAIController
 
 	AAIController_Base(const FObjectInitializer& ObjectInitializer);
 
+	virtual void Possess(class APawn* InPawn) override;
+	virtual void UnPossess() override;
+
 public:
 	virtual void BeginPlay() override;
 

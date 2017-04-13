@@ -28,12 +28,22 @@ AAIController_Base::AAIController_Base(const FObjectInitializer& ObjectInitializ
 	
 }
 
+void AAIController_Base::Possess(class APawn* InPawn)
+{
+	Super::Possess(InPawn);
+
+	Pawn = Cast<AAI_Base>(InPawn);
+}
+
+void AAIController_Base::UnPossess()
+{
+	Super::UnPossess();
+}
+
 void AAIController_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	Pawn = Cast<AAI_Base>(GetPawn());
-
 	MainAction = Pawn->MainStats.MainAction;
 
 	AIPerception->OnPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnSenceUpdated);
