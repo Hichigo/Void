@@ -5,8 +5,9 @@
 #include "GameFramework/Character.h"
 #include "Structures/Enemy/EnemyStructures.h"
 #include "Enemy/AI_PathPatrol.h"
-
+#include "Runtime/AIModule/Classes/BehaviorTree/BehaviorTree.h"
 #include "AI_Base.generated.h"
+
 
 UCLASS()
 class ISLANDOFTHEVOID_API AAI_Base : public ACharacter
@@ -34,7 +35,7 @@ public:
 	FEnemyStats MainStats;
 
 	UPROPERTY(EditAnywhere, Category = "Behavior")
-	class UBehaviorTree *Behavior;
+	class UBehaviorTree *BehaviorTree;
 
 	UPROPERTY(EditAnywhere, Category = "Behavior")
 	class AAI_PathPatrol *PatrolPath;

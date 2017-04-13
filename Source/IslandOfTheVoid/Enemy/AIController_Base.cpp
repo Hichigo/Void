@@ -25,6 +25,8 @@ AAIController_Base::AAIController_Base(const FObjectInitializer& ObjectInitializ
 	AIPerception->OnPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnSenceUpdated);
 	AIPerception->OnTargetPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnTartgetSenceUpdated);
 
+	BehaviorComp = ObjectInitializer.CreateDefaultSubobject<UBehaviorTreeComponent>(this, TEXT("BehaviorComp"));
+	BlackboardComp = ObjectInitializer.CreateDefaultSubobject<UBlackboardComponent>(this, TEXT("BlackboardComp"));
 	
 }
 
@@ -33,6 +35,14 @@ void AAIController_Base::Possess(class APawn* InPawn)
 	Super::Possess(InPawn);
 
 	Pawn = Cast<AAI_Base>(InPawn);
+
+	if (Pawn)
+	{
+		if (Pawn->BehaviorTree->BlackboardAsset)
+		{
+
+		}
+	}
 }
 
 void AAIController_Base::UnPossess()
