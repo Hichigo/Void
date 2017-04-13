@@ -49,6 +49,8 @@ void AAIController_Base::Possess(class APawn* InPawn)
 void AAIController_Base::UnPossess()
 {
 	Super::UnPossess();
+
+	BehaviorComp->StopTree();
 }
 
 void AAIController_Base::BeginPlay()
