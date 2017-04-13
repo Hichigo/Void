@@ -26,12 +26,14 @@ private:
 	
 	EActionEnemy MainAction;
 	
+	UPROPERTY(VisibleAnywhere)
 	UAIPerceptionComponent *AIPerception;
 
+	UPROPERTY(VisibleAnywhere)
 	UAISenseConfig_Sight* SightConfig;
 
 	//TScriptDelegate<> Sence;
 
-	void OnPerceptionUpdated(TArray<AActor*> Actors);
-	void OnTartgetPerceptionUpdated(AActor *Actors, FAIStimulus Stimulus);
+	void OnSenceUpdated(TArray<AActor*> Actors);
+	void OnTartgetSenceUpdated(AActor *Actors, FAIStimulus Stimulus);
 };
