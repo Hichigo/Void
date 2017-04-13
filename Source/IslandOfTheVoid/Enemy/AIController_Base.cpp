@@ -40,8 +40,9 @@ void AAIController_Base::Possess(class APawn* InPawn)
 	{
 		if (Pawn->BehaviorTree->BlackboardAsset)
 		{
-
+			BlackboardComp->InitializeBlackboard(*Pawn->BehaviorTree->BlackboardAsset);
 		}
+		BehaviorComp->StartTree(*Pawn->BehaviorTree);
 	}
 }
 
