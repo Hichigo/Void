@@ -8,22 +8,22 @@ AAIController_Base::AAIController_Base(const FObjectInitializer& ObjectInitializ
 	: Super(ObjectInitializer)
 {
 	AIPerception = ObjectInitializer.CreateDefaultSubobject<UAIPerceptionComponent>(this, TEXT("AIPerception"));
-	
-	SightConfig = ObjectInitializer.CreateDefaultSubobject<UAISenseConfig_Sight>(this, TEXT("SightConfig"));
-	
-	AIPerception->ConfigureSense(*SightConfig);
+	AIPerception->OnPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnSenseUpdated);
+	AIPerception->OnTargetPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnTartgetSenseUpdated);
 
-	AIPerception->SetDominantSense(SightConfig->GetSenseImplementation());
+
+	Eyes = ObjectInitializer.CreateDefaultSubobject<UAISenseConfig_Sight>(this, TEXT("Eyes"));
 	
-	SightConfig->SightRadius = 1250.0f;
-	SightConfig->LoseSightRadius = 1500.0f;
-	SightConfig->DetectionByAffiliation.bDetectEnemies = true;
-	SightConfig->DetectionByAffiliation.bDetectNeutrals = true;
-	SightConfig->DetectionByAffiliation.bDetectFriendlies = true;
+	AIPerception->ConfigureSense(*Eyes);
+
+	AIPerception->SetDominantSense(Eyes->GetSenseImplementation());
 	
-	//Sence.BindUFunction(this, "OnPerceptionUpdated");
-	AIPerception->OnPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnSenceUpdated);
-	AIPerception->OnTargetPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnTartgetSenceUpdated);
+	Eyes->SightRadius = 1250.0f;
+	Eyes->LoseSightRadius = 1500.0f;
+	Eyes->DetectionByAffiliation.bDetectEnemies = true;
+	Eyes->DetectionByAffiliation.bDetectNeutrals = true;
+	Eyes->DetectionByAffiliation.bDetectFriendlies = true;
+	
 
 	BehaviorComp = ObjectInitializer.CreateDefaultSubobject<UBehaviorTreeComponent>(this, TEXT("BehaviorComp"));
 	BlackboardComp = ObjectInitializer.CreateDefaultSubobject<UBlackboardComponent>(this, TEXT("BlackboardComp"));
@@ -33,7 +33,7 @@ AAIController_Base::AAIController_Base(const FObjectInitializer& ObjectInitializ
 void AAIController_Base::Possess(class APawn* InPawn)
 {
 	Super::Possess(InPawn);
-
+	
 	Pawn = Cast<AAI_Base>(InPawn);
 
 	if (Pawn)
@@ -59,25 +59,21 @@ void AAIController_Base::BeginPlay()
 	
 	MainAction = Pawn->MainStats.MainAction;
 
-	AIPerception->OnPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnSenceUpdated);
-	AIPerception->OnTargetPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnTartgetSenceUpdated);
 
 	ACharacter *Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
-	UAIPerceptionSystem::RegisterPerceptionStimuliSource(this, SightConfig->GetSenseImplementation(), GetPawn());
-	UAIPerceptionSystem::RegisterPerceptionStimuliSource(this, SightConfig->GetSenseImplementation(), Player);
-	
-	
 
-	UE_LOG(LogTemp, Warning, TEXT("Success %s"), *Player->GetName());
+	UAIPerceptionSystem::RegisterPerceptionStimuliSource(this, Eyes->GetSenseImplementation(), Pawn);
+	UAIPerceptionSystem::RegisterPerceptionStimuliSource(this, Eyes->GetSenseImplementation(), Player);
+	
 }
 
-void AAIController_Base::OnSenceUpdated(TArray<AActor*> Actors)
+void AAIController_Base::OnSenseUpdated(TArray<AActor*> UpdatedActors)
 {
 	ACharacter *Player = GetCharacter();
 	FActorPerceptionBlueprintInfo InfoActor;
 
-	UE_LOG(LogTemp, Warning, TEXT("Success %s"), *Player->GetName());
-	for (auto Actor : Actors)
+	UE_LOG(LogTemp, Warning, TEXT("Senced Actors %s"), *Player->GetName());
+	for (auto Actor : UpdatedActors)
 	{
 		if (Player == Actor)
 		{
@@ -97,7 +93,7 @@ void AAIController_Base::OnSenceUpdated(TArray<AActor*> Actors)
 	}
 }
 
-void AAIController_Base::OnTartgetSenceUpdated(AActor *Actors, FAIStimulus Stimulus)
+void AAIController_Base::OnTartgetSenseUpdated(AActor *Actor, FAIStimulus Stimulus)
 {
 	UE_LOG(LogTemp, Warning, TEXT("target"));
 }

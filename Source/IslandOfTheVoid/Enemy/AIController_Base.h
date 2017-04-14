@@ -45,12 +45,12 @@ private:
 	UAIPerceptionComponent *AIPerception;
 
 	UPROPERTY(VisibleAnywhere)
-	UAISenseConfig_Sight* SightConfig;
+	UAISenseConfig_Sight* Eyes;
 
 	//TScriptDelegate<> Sence;
 
-	void OnSenceUpdated(TArray<AActor*> Actors);
-	void OnTartgetSenceUpdated(AActor *Actors, FAIStimulus Stimulus);
+	void OnSenseUpdated(TArray<AActor*> UpdatedActors);
+	void OnTartgetSenseUpdated(AActor *Actor, FAIStimulus Stimulus);
 
 public:
 	/** Returns BlackboardComp subobject **/
