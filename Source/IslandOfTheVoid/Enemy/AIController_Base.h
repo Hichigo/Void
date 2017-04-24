@@ -10,8 +10,8 @@
 #include "Runtime/AIModule/Classes/BehaviorTree/BlackboardComponent.h"
 #include "AIController_Base.generated.h"
 
-class UBehaviorTreeComponent;
-class UBlackboardComponent;
+//class UBehaviorTreeComponent;
+//class UBlackboardComponent;
 
 /**
  * 
@@ -21,40 +21,23 @@ class ISLANDOFTHEVOID_API AAIController_Base : public AAIController
 {
 	GENERATED_BODY()
 
-	AAIController_Base(const FObjectInitializer& ObjectInitializer);
-
-	virtual void Possess(class APawn* InPawn) override;
-	virtual void UnPossess() override;
+	AAIController_Base();
 
 public:
 	virtual void BeginPlay() override;
 
-private:
-	AAI_Base *Pawn;
-	
-	EActionEnemy MainAction;
-	
-	UPROPERTY(transient)
-	UBlackboardComponent* BlackboardComp;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test)
+	UAIPerceptionComponent* AIPerceptionComp;
 
-	/* Cached BT component */
-	UPROPERTY(transient)
-	UBehaviorTreeComponent* BehaviorComp;
-	
-	UPROPERTY(VisibleAnywhere)
-	UAIPerceptionComponent *AIPerception;
-
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test)
 	UAISenseConfig_Sight* Eyes;
 
-	//TScriptDelegate<> Sence;
-
+	UFUNCTION(BlueprintCallable, Category = Test)
 	void OnSenseUpdated(TArray<AActor*> UpdatedActors);
+
+	UFUNCTION(BlueprintCallable, Category = Test)
 	void OnTartgetSenseUpdated(AActor *Actor, FAIStimulus Stimulus);
 
-public:
-	/** Returns BlackboardComp subobject **/
-	FORCEINLINE UBlackboardComponent* GetBlackboardComp() const { return BlackboardComp; }
-	/** Returns BehaviorComp subobject **/
-	FORCEINLINE UBehaviorTreeComponent* GetBehaviorComp() const { return BehaviorComp; }
+private:
+	
 };

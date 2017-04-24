@@ -4,76 +4,42 @@
 #include "AIController_Base.h"
 
 
-AAIController_Base::AAIController_Base(const FObjectInitializer& ObjectInitializer)
-	: Super(ObjectInitializer)
+AAIController_Base::AAIController_Base()
 {
-	AIPerception = ObjectInitializer.CreateDefaultSubobject<UAIPerceptionComponent>(this, TEXT("AIPerception"));
-	AIPerception->OnPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnSenseUpdated);
-	AIPerception->OnTargetPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnTartgetSenseUpdated);
-
-
-	Eyes = ObjectInitializer.CreateDefaultSubobject<UAISenseConfig_Sight>(this, TEXT("Eyes"));
-	
-	AIPerception->ConfigureSense(*Eyes);
-
-	AIPerception->SetDominantSense(Eyes->GetSenseImplementation());
-	
-	Eyes->SightRadius = 1250.0f;
-	Eyes->LoseSightRadius = 1500.0f;
+	AIPerceptionComp = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("AIEyes"));
+	AIPerceptionComp->OnPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnSenseUpdated);
+	AIPerceptionComp->OnTargetPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnTartgetSenseUpdated);
+	SetPerceptionComponent(*AIPerceptionComp);
+	Eyes = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("Eyes"));
+	Eyes->SightRadius = 500.0f;
+	Eyes->LoseSightRadius = 600.0f;
 	Eyes->DetectionByAffiliation.bDetectEnemies = true;
-	Eyes->DetectionByAffiliation.bDetectNeutrals = true;
 	Eyes->DetectionByAffiliation.bDetectFriendlies = true;
-	
-
-	BehaviorComp = ObjectInitializer.CreateDefaultSubobject<UBehaviorTreeComponent>(this, TEXT("BehaviorComp"));
-	BlackboardComp = ObjectInitializer.CreateDefaultSubobject<UBlackboardComponent>(this, TEXT("BlackboardComp"));
-	
-}
-
-void AAIController_Base::Possess(class APawn* InPawn)
-{
-	Super::Possess(InPawn);
-	
-	Pawn = Cast<AAI_Base>(InPawn);
-
-	if (Pawn)
-	{
-		if (Pawn->BehaviorTree->BlackboardAsset)
-		{
-			BlackboardComp->InitializeBlackboard(*Pawn->BehaviorTree->BlackboardAsset);
-		}
-		BehaviorComp->StartTree(*Pawn->BehaviorTree);
-	}
-}
-
-void AAIController_Base::UnPossess()
-{
-	Super::UnPossess();
-
-	BehaviorComp->StopTree();
+	Eyes->DetectionByAffiliation.bDetectNeutrals = true;
+	AIPerceptionComp->ConfigureSense(*Eyes);
 }
 
 void AAIController_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	MainAction = Pawn->MainStats.MainAction;
+	//MainAction = Pawn->MainStats.MainAction;
 
 
-	ACharacter *Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+	//ACharacter *Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 
-	UAIPerceptionSystem::RegisterPerceptionStimuliSource(this, Eyes->GetSenseImplementation(), Pawn);
-	UAIPerceptionSystem::RegisterPerceptionStimuliSource(this, Eyes->GetSenseImplementation(), Player);
+	//UAIPerceptionSystem::RegisterPerceptionStimuliSource(this, Eyes->GetSenseImplementation(), Pawn);
+	//UAIPerceptionSystem::RegisterPerceptionStimuliSource(this, Eyes->GetSenseImplementation(), Player);
 	
 }
 
 void AAIController_Base::OnSenseUpdated(TArray<AActor*> UpdatedActors)
 {
-	ACharacter *Player = GetCharacter();
-	FActorPerceptionBlueprintInfo InfoActor;
+	//ACharacter *Player = GetCharacter();
+	//FActorPerceptionBlueprintInfo InfoActor;
 
-	UE_LOG(LogTemp, Warning, TEXT("Senced Actors %s"), *Player->GetName());
-	for (auto Actor : UpdatedActors)
+	UE_LOG(LogTemp, Warning, TEXT("Senced Actors"));
+	/*for (auto Actor : UpdatedActors)
 	{
 		if (Player == Actor)
 		{
@@ -90,7 +56,7 @@ void AAIController_Base::OnSenseUpdated(TArray<AActor*> UpdatedActors)
 				UE_LOG(LogTemp, Warning, TEXT("Failed"));
 			}
 		}
-	}
+	}*/
 }
 
 void AAIController_Base::OnTartgetSenseUpdated(AActor *Actor, FAIStimulus Stimulus)
