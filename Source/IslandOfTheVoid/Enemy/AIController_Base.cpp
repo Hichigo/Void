@@ -4,19 +4,23 @@
 #include "AIController_Base.h"
 
 
-AAIController_Base::AAIController_Base()
+AAIController_Base::AAIController_Base(const FObjectInitializer& ObjectInitializer)
+	: Super(ObjectInitializer)
 {
-	AIPerceptionComp = CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("AIEyes"));
+	AIPerceptionComp = ObjectInitializer.CreateDefaultSubobject<UAIPerceptionComponent>(this, TEXT("AIEyes"));
 	AIPerceptionComp->OnPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnSenseUpdated);
 	AIPerceptionComp->OnTargetPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnTartgetSenseUpdated);
 	SetPerceptionComponent(*AIPerceptionComp);
-	Eyes = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("Eyes"));
+	Eyes = ObjectInitializer.CreateDefaultSubobject<UAISenseConfig_Sight>(this, TEXT("Eyes"));
 	Eyes->SightRadius = 500.0f;
 	Eyes->LoseSightRadius = 600.0f;
 	Eyes->DetectionByAffiliation.bDetectEnemies = true;
 	Eyes->DetectionByAffiliation.bDetectFriendlies = true;
 	Eyes->DetectionByAffiliation.bDetectNeutrals = true;
 	AIPerceptionComp->ConfigureSense(*Eyes);
+
+	BlackboardComp = ObjectInitializer.CreateDefaultSubobject<UBlackboardComponent>(this, TEXT("BlackboardComp"));
+	BehaviorComp = ObjectInitializer.CreateDefaultSubobject<UBehaviorTreeComponent>(this, TEXT("BehaviorTreeComp"));
 }
 
 void AAIController_Base::BeginPlay()
@@ -33,17 +37,40 @@ void AAIController_Base::BeginPlay()
 	
 }
 
+void AAIController_Base::Possess(APawn* InPawn)
+{
+	Super::Possess(InPawn);
+	
+	Pawn = Cast<AAI_Base>(InPawn);
+
+	if (Pawn && Pawn->BehaviorTree)
+	{
+		if (Pawn->BehaviorTree->BlackboardAsset)
+		{
+			BlackboardComp->InitializeBlackboard(*Pawn->BehaviorTree->BlackboardAsset);
+		}
+
+		BehaviorComp->StartTree(*(Pawn->BehaviorTree));
+	}
+}
+
+void AAIController_Base::UnPossess()
+{
+	Super::UnPossess();
+
+}
+
 void AAIController_Base::OnSenseUpdated(TArray<AActor*> UpdatedActors)
 {
-	//ACharacter *Player = GetCharacter();
-	//FActorPerceptionBlueprintInfo InfoActor;
+	ACharacter *Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+	FActorPerceptionBlueprintInfo InfoActor;
 
 	UE_LOG(LogTemp, Warning, TEXT("Senced Actors"));
-	/*for (auto Actor : UpdatedActors)
+	for (auto Actor : UpdatedActors)
 	{
 		if (Player == Actor)
 		{
-			AIPerception->GetActorsPerception(Actor, InfoActor);
+			AIPerceptionComp->GetActorsPerception(Actor, InfoActor);
 
 			FAIStimulus Stimulus = InfoActor.LastSensedStimuli[0];
 
@@ -56,7 +83,7 @@ void AAIController_Base::OnSenseUpdated(TArray<AActor*> UpdatedActors)
 				UE_LOG(LogTemp, Warning, TEXT("Failed"));
 			}
 		}
-	}*/
+	}
 }
 
 void AAIController_Base::OnTartgetSenseUpdated(AActor *Actor, FAIStimulus Stimulus)

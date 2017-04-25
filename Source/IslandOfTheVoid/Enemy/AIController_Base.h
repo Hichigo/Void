@@ -21,10 +21,14 @@ class ISLANDOFTHEVOID_API AAIController_Base : public AAIController
 {
 	GENERATED_BODY()
 
-	AAIController_Base();
+	AAIController_Base(const FObjectInitializer& ObjectInitializer);
 
 public:
 	virtual void BeginPlay() override;
+
+	virtual void Possess(APawn* InPawn) override;
+
+	virtual void UnPossess() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test)
 	UAIPerceptionComponent* AIPerceptionComp;
@@ -38,6 +42,18 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Test)
 	void OnTartgetSenseUpdated(AActor *Actor, FAIStimulus Stimulus);
 
+	/** Returns BlackboardComp subobject **/
+	FORCEINLINE UBlackboardComponent* GetBlackboardComp() const { return BlackboardComp; }
+	/** Returns BehaviorComp subobject **/
+	FORCEINLINE UBehaviorTreeComponent* GetBehaviorComp() const { return BehaviorComp; }
+
 private:
-	
+	AAI_Base *Pawn;
+
+	UPROPERTY(transient)
+	UBlackboardComponent* BlackboardComp;
+
+	/* Cached BT component */
+	UPROPERTY(transient)
+	UBehaviorTreeComponent* BehaviorComp;
 };
