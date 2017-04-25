@@ -91,5 +91,23 @@ void AAIController_Base::OnSenseUpdated(TArray<AActor*> UpdatedActors)
 void AAIController_Base::OnTartgetSenseUpdated(AActor *Actor, FAIStimulus Stimulus)
 {
 	UE_LOG(LogTemp, Warning, TEXT("target"));
+	ACharacter *Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+
+	if (Actor == Player)
+	{
+		if (Stimulus.WasSuccessfullySensed())
+		{
+			//clear timer
+			Pawn->GetCharacterMovement()->MaxWalkSpeed = 500.0f;
+			BlackboardComp->SetValueAsEnum(FName("Action"), (uint8)EActionEnemy::Chase);
+		}
+		else
+		{
+			BlackboardComp->SetValueAsVector(FName("LastSeePlayerLocation"), Pawn->GetActorLocation());
+			Pawn->GetCharacterMovement()->MaxWalkSpeed = 350.0f;
+			//set timer and save id timer
+			BlackboardComp->SetValueAsEnum(FName("Action"), (uint8)EActionEnemy::Search);
+		}
+	}
 }
 
