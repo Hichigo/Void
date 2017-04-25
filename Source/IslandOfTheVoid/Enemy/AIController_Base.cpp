@@ -65,7 +65,6 @@ void AAIController_Base::OnSenseUpdated(TArray<AActor*> UpdatedActors)
 	ACharacter *Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	FActorPerceptionBlueprintInfo InfoActor;
 
-	UE_LOG(LogTemp, Warning, TEXT("Senced Actors"));
 	for (auto Actor : UpdatedActors)
 	{
 		if (Player == Actor)
@@ -73,14 +72,17 @@ void AAIController_Base::OnSenseUpdated(TArray<AActor*> UpdatedActors)
 			AIPerceptionComp->GetActorsPerception(Actor, InfoActor);
 
 			FAIStimulus Stimulus = InfoActor.LastSensedStimuli[0];
-
+			
 			if (Stimulus.WasSuccessfullySensed())
 			{
 				UE_LOG(LogTemp, Warning, TEXT("Success"));
+				BlackboardComp->SetValueAsEnum(FName("Action"), (uint8)EActionEnemy::Chase);
+				BlackboardComp->SetValueAsObject(FName("Player"), InfoActor.Target);
 			}
 			else
 			{
 				UE_LOG(LogTemp, Warning, TEXT("Failed"));
+				BlackboardComp->SetValueAsObject(FName("Player"), nullptr);
 			}
 		}
 	}
