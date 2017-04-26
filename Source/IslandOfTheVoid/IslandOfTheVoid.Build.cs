@@ -12,7 +12,8 @@ public class IslandOfTheVoid : ModuleRules
             "Engine",
             "InputCore",
             "HeadMountedDisplay",
-            "AIModule"
+            "AIModule",
+            "GameplayTasks"
         });
 	}
 }
