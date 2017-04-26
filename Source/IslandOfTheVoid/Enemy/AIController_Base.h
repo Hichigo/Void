@@ -36,16 +36,19 @@ public:
 
 	virtual void UnPossess() override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test)
+	UPROPERTY(EditAnywhere, Category = "AI")
+	EActionEnemy MainAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 	UAIPerceptionComponent* AIPerceptionComp;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Test)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 	UAISenseConfig_Sight* Eyes;
 
-	UFUNCTION(BlueprintCallable, Category = Test)
+	UFUNCTION(BlueprintCallable, Category = "AI")
 	void OnSenseUpdated(TArray<AActor*> UpdatedActors);
 
-	UFUNCTION(BlueprintCallable, Category = Test)
+	UFUNCTION(BlueprintCallable, Category = "AI")
 	void OnTartgetSenseUpdated(AActor *Actor, FAIStimulus Stimulus);
 
 	/** Returns BlackboardComp subobject **/
@@ -63,4 +66,8 @@ private:
 	/* Cached BT component */
 	UPROPERTY(transient)
 	UBehaviorTreeComponent* BehaviorComp;
+
+	void ForgetPlayer();
+
+	FTimerHandle ForgetPlayerTimer;
 };

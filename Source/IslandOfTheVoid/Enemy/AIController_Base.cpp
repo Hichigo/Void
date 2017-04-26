@@ -21,6 +21,8 @@ AAIController_Base::AAIController_Base(const FObjectInitializer& ObjectInitializ
 
 	BlackboardComp = ObjectInitializer.CreateDefaultSubobject<UBlackboardComponent>(this, TEXT("BlackboardComp"));
 	BehaviorComp = ObjectInitializer.CreateDefaultSubobject<UBehaviorTreeComponent>(this, TEXT("BehaviorTreeComp"));
+
+	MainAction = EActionEnemy::Patrol;
 }
 
 void AAIController_Base::BeginPlay()
@@ -98,6 +100,7 @@ void AAIController_Base::OnTartgetSenseUpdated(AActor *Actor, FAIStimulus Stimul
 		if (Stimulus.WasSuccessfullySensed())
 		{
 			//clear timer
+			GetWorldTimerManager().ClearTimer(ForgetPlayerTimer);
 			Pawn->GetCharacterMovement()->MaxWalkSpeed = 500.0f;
 			BlackboardComp->SetValueAsEnum(FName("Action"), (uint8)EActionEnemy::Chase);
 		}
@@ -106,8 +109,15 @@ void AAIController_Base::OnTartgetSenseUpdated(AActor *Actor, FAIStimulus Stimul
 			BlackboardComp->SetValueAsVector(FName("LastSeePlayerLocation"), Pawn->GetActorLocation());
 			Pawn->GetCharacterMovement()->MaxWalkSpeed = 350.0f;
 			//set timer and save id timer
+			GetWorldTimerManager().SetTimer(ForgetPlayerTimer, this, &AAIController_Base::ForgetPlayer, 15.0f, false);
 			BlackboardComp->SetValueAsEnum(FName("Action"), (uint8)EActionEnemy::Search);
 		}
 	}
+}
+
+void AAIController_Base::ForgetPlayer()
+{
+	Pawn->GetCharacterMovement()->MaxWalkSpeed = 200.0f;
+	BlackboardComp->SetValueAsEnum(FName("Action"), (uint8)MainAction);
 }
 
