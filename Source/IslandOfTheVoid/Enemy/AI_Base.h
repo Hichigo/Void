@@ -42,4 +42,6 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Behavior")
 	int32 StartPointPatrol;
+
+	FORCEINLINE AAI_PathPatrol* GetPathPatrol() const { return PatrolPath; }
 };
