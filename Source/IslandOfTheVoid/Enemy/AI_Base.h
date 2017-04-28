@@ -30,9 +30,17 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+	
 
 	UPROPERTY(EditAnywhere, Category = "Enemy")
 	FEnemyStats MainStats;
+
+	UPROPERTY(EditAnywhere, Category = "Behavior")
+	EActionEnemy MainAction;
+
+	UPROPERTY(EditAnywhere, Category = "Behavior")
+	EPatrolDirection PatrolDirection;
 
 	UPROPERTY(EditAnywhere, Category = "Behavior")
 	class UBehaviorTree *BehaviorTree;
@@ -44,4 +52,5 @@ public:
 	int32 StartPointPatrol;
 
 	FORCEINLINE AAI_PathPatrol* GetPathPatrol() const { return PatrolPath; }
+
 };

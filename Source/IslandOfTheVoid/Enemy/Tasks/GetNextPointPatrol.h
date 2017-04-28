@@ -20,8 +20,8 @@ class ISLANDOFTHEVOID_API UGetNextPointPatrol : public UBTTask_BlueprintBase
 public:
 	
 
-	//UPROPERTY(EditAnywhere);
-	FBlackboardKeySelector TargetLocation;
+	UPROPERTY(EditAnywhere)
+	struct FBlackboardKeySelector TargetLocation;
 	
 	
 };

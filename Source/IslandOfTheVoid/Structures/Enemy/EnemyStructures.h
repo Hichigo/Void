@@ -21,6 +21,16 @@ enum class EActionEnemy : uint8
 	Search
 };
 
+/**
+* Enumeration for patrol direction enemy character
+*/
+UENUM(BlueprintType)
+enum class EPatrolDirection : uint8
+{
+	Loop,
+	Forward,
+	Backward
+};
 
 
 /**

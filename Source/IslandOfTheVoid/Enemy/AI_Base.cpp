@@ -13,6 +13,9 @@ AAI_Base::AAI_Base()
 	PrimaryActorTick.bCanEverTick = true;
 
 	AIControllerClass = AAIController_Base::StaticClass();
+
+	MainAction = EActionEnemy::Patrol;
+	PatrolDirection = EPatrolDirection::Loop;
 }
 
 // Called when the game starts or when spawned
