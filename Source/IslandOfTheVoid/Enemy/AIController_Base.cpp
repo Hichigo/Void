@@ -29,13 +29,7 @@ void AAIController_Base::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	//MainAction = Pawn->MainStats.MainAction;
-
-
-	//ACharacter *Player = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
-
-	//UAIPerceptionSystem::RegisterPerceptionStimuliSource(this, Eyes->GetSenseImplementation(), Pawn);
-	//UAIPerceptionSystem::RegisterPerceptionStimuliSource(this, Eyes->GetSenseImplementation(), Player);
+	BlackboardComp->SetValueAsEnum(FName("Action"), (uint8)MainAction);
 	
 }
 
@@ -60,6 +54,7 @@ void AAIController_Base::UnPossess()
 {
 	Super::UnPossess();
 
+	BehaviorComp->StopTree();
 }
 
 void AAIController_Base::OnSenseUpdated(TArray<AActor*> UpdatedActors)

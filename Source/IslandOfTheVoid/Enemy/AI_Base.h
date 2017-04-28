@@ -33,7 +33,7 @@ public:
 	
 	
 
-	UPROPERTY(EditAnywhere, Category = "Enemy")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Enemy")
 	FEnemyStats MainStats;
 
 	UPROPERTY(EditAnywhere, Category = "Behavior")
