@@ -11,7 +11,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(Category = "IslandOfTheVoid")
 class ISLANDOFTHEVOID_API UNextPointPatrol : public UBTTask_BlackboardBase
 {
 	GENERATED_BODY()
