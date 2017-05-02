@@ -12,8 +12,8 @@ AAIController_Base::AAIController_Base(const FObjectInitializer& ObjectInitializ
 	AIPerceptionComp->OnTargetPerceptionUpdated.AddDynamic(this, &AAIController_Base::OnTartgetSenseUpdated);
 	SetPerceptionComponent(*AIPerceptionComp);
 	Eyes = ObjectInitializer.CreateDefaultSubobject<UAISenseConfig_Sight>(this, TEXT("Eyes"));
-	Eyes->SightRadius = 500.0f;
-	Eyes->LoseSightRadius = 600.0f;
+	Eyes->SightRadius = 1000.0f;
+	Eyes->LoseSightRadius = 1500.0f;
 	Eyes->DetectionByAffiliation.bDetectEnemies = true;
 	Eyes->DetectionByAffiliation.bDetectFriendlies = true;
 	Eyes->DetectionByAffiliation.bDetectNeutrals = true;
@@ -101,8 +101,9 @@ void AAIController_Base::OnTartgetSenseUpdated(AActor *Actor, FAIStimulus Stimul
 		}
 		else
 		{
-			BlackboardComp->SetValueAsVector(FName("LastSeePlayerLocation"), Pawn->GetActorLocation());
+			BlackboardComp->SetValueAsVector(FName("LastSeePlayerLocation"), Actor->GetActorLocation());
 			Pawn->GetCharacterMovement()->MaxWalkSpeed = 350.0f;
+			UE_LOG(LogTemp, Warning, TEXT("LastSeePlayerLocation"));
 			//set timer and save id timer
 			GetWorldTimerManager().SetTimer(ForgetPlayerTimer, this, &AAIController_Base::ForgetPlayer, 15.0f, false);
 			BlackboardComp->SetValueAsEnum(FName("Action"), (uint8)EActionEnemy::Search);
