@@ -4,6 +4,7 @@
 #include "VoidCharacter.h"
 #include "Component/StatComponent.h"
 #include "Component/AbilityComponent.h"
+#include "Enemy/AI_Base.h"
 //#include "Runtime/Engine/Classes/AI/Navigation/NavigationPath.h"
 #include "GameFramework/PlayerController.h"
 #include "VoidPlayerController.generated.h"
@@ -82,6 +83,9 @@ private:
 
 	/** Move character to cursor */
 	void MoveCharacterToCursor();
+
+	/** Move character to Object click */
+	void MoveCharacterToObject(FHitResult Hit);
 
 	/** Walk character to cursor */
 	void OnRightMousePressed();

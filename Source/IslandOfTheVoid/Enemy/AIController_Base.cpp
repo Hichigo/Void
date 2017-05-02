@@ -22,12 +22,12 @@ AAIController_Base::AAIController_Base(const FObjectInitializer& ObjectInitializ
 	BlackboardComp = ObjectInitializer.CreateDefaultSubobject<UBlackboardComponent>(this, TEXT("BlackboardComp"));
 	BehaviorComp = ObjectInitializer.CreateDefaultSubobject<UBehaviorTreeComponent>(this, TEXT("BehaviorTreeComp"));
 
-	MainAction = EActionEnemy::Patrol;
 }
 
 void AAIController_Base::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	
 	BlackboardComp->SetValueAsEnum(FName("Action"), (uint8)MainAction);
 	
@@ -45,6 +45,10 @@ void AAIController_Base::Possess(APawn* InPawn)
 		{
 			BlackboardComp->InitializeBlackboard(*Pawn->BehaviorTree->BlackboardAsset);
 		}
+
+		BlackboardComp->SetValueAsVector(FName("HomeLocation"), Pawn->GetActorLocation());
+		BlackboardComp->SetValueAsRotator(FName("IdleRotation"), Pawn->GetActorRotation());
+		MainAction = Pawn->MainAction;
 
 		BehaviorComp->StartTree(*(Pawn->BehaviorTree));
 	}

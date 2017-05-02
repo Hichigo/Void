@@ -104,14 +104,14 @@ void AVoidPlayerController::BeginPlay()
 
 void AVoidPlayerController::MoveCharacterToCursor()
 {
-	APawn* const MyPawn = GetPawn();
-	if (MyPawn)
+	APawn* const Pawn = GetPawn();
+	if (Pawn)
 	{
 		FHitResult Hit;
 		GetHitResultUnderCursor(ECC_Visibility, true, Hit);
 
 		UNavigationSystem* const NavSys = GetWorld()->GetNavigationSystem();
-		float const Distance = FVector::Dist(Hit.ImpactPoint, MyPawn->GetActorLocation());
+		float const Distance = FVector::Dist(Hit.ImpactPoint, Pawn->GetActorLocation());
 		//float PathLength = 0.0;
 		//NavSys->GetPathLength(MyPawn->GetActorLocation(), Hit.ImpactPoint, PathLength);
 		//tpath = NavSys->FindPathToLocationSynchronously(GetWorld(), MyPawn->GetActorLocation(), Hit.ImpactPoint);
@@ -125,11 +125,37 @@ void AVoidPlayerController::MoveCharacterToCursor()
 	}
 }
 
+void AVoidPlayerController::MoveCharacterToObject(FHitResult Hit)
+{
+	APawn* const Pawn = GetPawn();
+	if (Pawn)
+	{
+		UNavigationSystem* const NavSys = GetWorld()->GetNavigationSystem();
+		float const Distance = FVector::Dist(Hit.ImpactPoint, Pawn->GetActorLocation());
+		
+		if ( NavSys && (Distance > 120.0f) )
+		{
+			NavSys->SimpleMoveToActor(this, Hit.GetActor());
+			//Goal = Hit.ImpactPoint;
+		}
+	}
+}
+
 void AVoidPlayerController::OnRightMousePressed()
 {
 	FHitResult Hit;
 	GetHitResultUnderCursor(ECC_Visibility, true, Hit);
-	UE_LOG(LogTemp, Warning, TEXT("string %s"), *Hit.Actor->GetName());
+	
+	
+	AAI_Base *Enemy = Cast<AAI_Base>(Hit.GetActor());
+
+	if (Enemy != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("string %s"), *Enemy->GetName());
+		MoveCharacterToObject(Hit);
+		return;
+	}
+
 
 	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.WalkSpeed;
 	Stat->SetMovemetType(EMoveType::Walking);
