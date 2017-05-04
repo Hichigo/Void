@@ -146,6 +146,8 @@ void AVoidPlayerController::OnRightMousePressed()
 	FHitResult Hit;
 	GetHitResultUnderCursor(ECC_Visibility, true, Hit);
 	
+	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.WalkSpeed;
+	Stat->SetMovemetType(EMoveType::Walking);
 	
 	AAI_Base *Enemy = Cast<AAI_Base>(Hit.GetActor());
 
@@ -157,8 +159,7 @@ void AVoidPlayerController::OnRightMousePressed()
 	}
 
 
-	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.WalkSpeed;
-	Stat->SetMovemetType(EMoveType::Walking);
+	
 	
 	MoveCharacterToCursor();
 	
@@ -166,9 +167,21 @@ void AVoidPlayerController::OnRightMousePressed()
 
 void AVoidPlayerController::OnRightMouseDoublePressed()
 {
+	FHitResult Hit;
+	GetHitResultUnderCursor(ECC_Visibility, true, Hit);
+
 	CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.RunSpeed;
 	Stat->SetMovemetType(EMoveType::Running);
 	
+	AAI_Base *Enemy = Cast<AAI_Base>(Hit.GetActor());
+
+	if (Enemy != nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("string %s"), *Enemy->GetName());
+		MoveCharacterToObject(Hit);
+		return;
+	}
+
 	MoveCharacterToCursor();
 }
 

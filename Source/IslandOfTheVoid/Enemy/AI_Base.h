@@ -31,6 +31,11 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
+	UFUNCTION()
+	void CustomOnBeginMouseOver(UPrimitiveComponent* TouchedComponent);
+
+	UFUNCTION()
+	void CustomOnEndMouseOver(UPrimitiveComponent* TouchedComponent);
 	
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Enemy")

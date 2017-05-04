@@ -16,6 +16,9 @@ AAI_Base::AAI_Base()
 
 	MainAction = EActionEnemy::Patrol;
 	PatrolDirection = EPatrolDirection::Loop;
+
+	GetMesh()->OnBeginCursorOver.AddDynamic(this, &AAI_Base::CustomOnBeginMouseOver);
+	GetMesh()->OnEndCursorOver.AddDynamic(this, &AAI_Base::CustomOnEndMouseOver);
 }
 
 // Called when the game starts or when spawned
@@ -50,5 +53,17 @@ void AAI_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AAI_Base::CustomOnBeginMouseOver(UPrimitiveComponent* TouchedComponent)
+{
+	UE_LOG(LogTemp, Warning, TEXT("over mouse"));
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->CurrentMouseCursor = EMouseCursor::Crosshairs;
+}
+
+void AAI_Base::CustomOnEndMouseOver(UPrimitiveComponent* TouchedComponent)
+{
+	UE_LOG(LogTemp, Warning, TEXT("end over mouse"));
+	UGameplayStatics::GetPlayerController(GetWorld(), 0)->CurrentMouseCursor = EMouseCursor::Hand;
 }
 
