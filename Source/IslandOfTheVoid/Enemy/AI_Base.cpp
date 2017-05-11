@@ -63,10 +63,12 @@ void AAI_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 void AAI_Base::CustomOnBeginMouseOver(UPrimitiveComponent* TouchedComponent)
 {
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->CurrentMouseCursor = EMouseCursor::Crosshairs;
+	GetMesh()->SetRenderCustomDepth(true);
 }
 
 void AAI_Base::CustomOnEndMouseOver(UPrimitiveComponent* TouchedComponent)
 {
 	UGameplayStatics::GetPlayerController(GetWorld(), 0)->CurrentMouseCursor = EMouseCursor::Hand;
+	GetMesh()->SetRenderCustomDepth(false);
 }
 
