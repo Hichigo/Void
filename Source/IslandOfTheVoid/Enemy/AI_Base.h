@@ -37,7 +37,6 @@ public:
 	UFUNCTION()
 	void CustomOnEndMouseOver(UPrimitiveComponent* TouchedComponent);
 	
-
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Enemy")
 	FEnemyStats MainStats;
 

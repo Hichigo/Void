@@ -8,11 +8,12 @@
 #include "Runtime/AIModule/Classes/Perception/AISenseConfig_Sight.h"
 #include "Runtime/AIModule/Classes/BehaviorTree/BehaviorTreeComponent.h"
 #include "Runtime/AIModule/Classes/BehaviorTree/BlackboardComponent.h"
-#include "Runtime/AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
-#include "Runtime/AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
-#include "Runtime/AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyType_Float.h"
-#include "Runtime/AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyType_Rotator.h"
-#include "Runtime/AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyType_Enum.h"
+//#include "Runtime/AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyType_Object.h"
+//#include "Runtime/AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyType_Vector.h"
+//#include "Runtime/AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyType_Float.h"
+//#include "Runtime/AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyType_Rotator.h"
+//#include "Runtime/AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyType_Enum.h"
+#include "Runtime/AIModule/Classes/BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
 
 #include "AIController_Base.generated.h"
 
