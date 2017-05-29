@@ -6,6 +6,19 @@
 #include "HeroStructures.generated.h"
 
 
+
+/**
+* AI character enum for actions via behavior tree
+*/
+UENUM(BlueprintType)
+enum class EBTCharacterActions : uint8
+{
+	Idle,
+	WalkRun,
+	Attack,
+	Defence
+};
+
 /**
 * Enumeration for move type character
 */

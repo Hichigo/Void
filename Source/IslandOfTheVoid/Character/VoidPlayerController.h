@@ -71,7 +71,7 @@ private:
 	/** Stat component character */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ability", meta = (AllowPrivateAccess = "true"))
 	class UAbilityComponent* Ability;
-
+	
 	/** Tick event */
 	virtual void PlayerTick(float DeltaTime) override;
 
