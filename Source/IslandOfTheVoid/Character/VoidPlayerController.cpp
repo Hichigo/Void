@@ -75,8 +75,6 @@ void AVoidPlayerController::PlayerTick(float DeltaTime)
 			CharacterRef->GetCharacterMovement()->MaxWalkSpeed = Stat->GetAllStats().Movement.WalkSpeed;
 			Stat->SetMovemetType(EMoveType::Walking);
 		}
-		
-		
 	}
 }
 
@@ -102,13 +100,11 @@ void AVoidPlayerController::BeginPlay()
 	CharacterRef = Cast<AVoidCharacter>(GetPawn());
 }
 
-void AVoidPlayerController::MoveCharacterToCursor()
+void AVoidPlayerController::MoveCharacterToCursor(FHitResult Hit)
 {
 	APawn* const Pawn = GetPawn();
 	if (Pawn)
 	{
-		FHitResult Hit;
-		GetHitResultUnderCursor(ECC_Visibility, true, Hit);
 
 		UNavigationSystem* const NavSys = GetWorld()->GetNavigationSystem();
 		float const Distance = FVector::Dist(Hit.ImpactPoint, Pawn->GetActorLocation());
@@ -157,11 +153,8 @@ void AVoidPlayerController::OnRightMousePressed()
 		MoveCharacterToObject(Hit);
 		return;
 	}
-
-
 	
-	
-	MoveCharacterToCursor();
+	MoveCharacterToCursor(Hit);
 	
 }
 
@@ -182,7 +175,7 @@ void AVoidPlayerController::OnRightMouseDoublePressed()
 		return;
 	}
 
-	MoveCharacterToCursor();
+	MoveCharacterToCursor(Hit);
 }
 
 void AVoidPlayerController::OnMiddleMousePressed()

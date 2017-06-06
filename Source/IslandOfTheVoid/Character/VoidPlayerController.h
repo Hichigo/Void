@@ -82,7 +82,7 @@ private:
 	virtual void BeginPlay() override;
 
 	/** Move character to cursor */
-	void MoveCharacterToCursor();
+	void MoveCharacterToCursor(FHitResult Hit);
 
 	/** Move character to Object click */
 	void MoveCharacterToObject(FHitResult Hit);
