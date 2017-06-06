@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "IslandOfTheVoid.h"
-#include "Character/AI_PlayerController.h"
+//#include "Character/AI_PlayerController.h"
 #include "VoidCharacter.h"
 
 
@@ -9,7 +9,7 @@
 AVoidCharacter::AVoidCharacter()
 {
 
-	AIControllerClass = AAI_PlayerController::StaticClass();
+	//AIControllerClass = AAI_PlayerController::StaticClass();
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 	

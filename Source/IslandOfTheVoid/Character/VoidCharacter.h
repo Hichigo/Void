@@ -3,7 +3,7 @@
 #pragma once
 
 #include "GameFramework/Character.h"
-#include "Runtime/AIModule/Classes/BehaviorTree/BehaviorTree.h"
+//#include "Runtime/AIModule/Classes/BehaviorTree/BehaviorTree.h"
 #include "VoidCharacter.generated.h"
 
 UCLASS()
@@ -31,8 +31,8 @@ public:
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 
-	UPROPERTY(EditAnywhere, Category = "Behavior")
-	class UBehaviorTree *BehaviorTree;
+	//UPROPERTY(EditAnywhere, Category = "Behavior")
+	//class UBehaviorTree *BehaviorTree;
 	
 private:
 	/** Top down camera */
